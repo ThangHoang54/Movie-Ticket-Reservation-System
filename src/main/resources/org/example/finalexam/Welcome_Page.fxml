@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.finalexam.controller.WelcomePage_Controller">
+   <children>
+      <HBox prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #DDA853;">
+         <children>
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="1111.0" text="COSC2440|COSC2731 Further Programming (S3, 2024)" textAlignment="CENTER" textFill="#f5f0e1">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+         </children></HBox>
+      <HBox prefHeight="540.0" prefWidth="600.0">
+         <children>
+            <AnchorPane prefHeight="540.0" prefWidth="50.0" style="-fx-background-color: #16404D;" />
+            <AnchorPane prefHeight="540.0" prefWidth="1000.0" style="-fx-background-color: #FBF5DD;">
+               <children>
+                  <Button fx:id="bt_user" layoutX="440.0" layoutY="188.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Magnage User">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="bt_booking" layoutX="440.0" layoutY="247.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Manage Booking">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="bt_screen" layoutX="440.0" layoutY="310.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Manage Screen" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font></Button>
+                  <Label alignment="CENTER" layoutX="89.0" layoutY="27.0" prefHeight="131.0" prefWidth="852.0" text="Assignment 3 - Lab test" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold Italic" size="36.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="bt_exits" layoutX="442.0" layoutY="444.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Exits Application" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="bt_theater" layoutX="441.0" layoutY="377.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Manage Theater" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="540.0" prefWidth="50.0" style="-fx-background-color: #16404D;" />
+         </children>
+      </HBox>
+      <HBox prefHeight="30.0" prefWidth="1100.0" style="-fx-background-color: #DDA853;">
+         <children>
+            <Label prefHeight="30.0" prefWidth="303.0" text=" Created by Hoang Minh Thang _ s3999925" textFill="#f5f0e1">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Label>
+         </children></HBox>
+   </children>
+</VBox>
