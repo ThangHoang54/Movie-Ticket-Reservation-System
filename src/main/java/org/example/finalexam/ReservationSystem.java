@@ -13,6 +13,7 @@ import java.io.IOException;
  */
 
 public class ReservationSystem extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome_Page.fxml"));

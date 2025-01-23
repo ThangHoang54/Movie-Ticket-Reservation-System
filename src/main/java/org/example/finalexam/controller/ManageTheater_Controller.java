@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.finalexam.controller.pop_up.ViewScreenList_Controller;
 import org.example.finalexam.dao.TheaterDAO;
@@ -64,6 +66,8 @@ public class ManageTheater_Controller implements Initializable {
     private TextField tf_search_name;
     @FXML
     private TextField tf_search_address;
+    @FXML
+    private ImageView iv_image;
 
     private void setUPButton() {
         bt_return.setOnAction(e -> {
@@ -385,6 +389,7 @@ public class ManageTheater_Controller implements Initializable {
 
         tableView.setItems(FXCollections.observableList(filteredTheaters));
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setUPButton();
@@ -393,7 +398,7 @@ public class ManageTheater_Controller implements Initializable {
         refreshTableViewListener();
         loadData();
         setupTextFieldFilter();
+
+       FXMLSupport.setImage(iv_image,"/org/example/finalexam/Image/theater.jpeg");
     }
-
-
 }

@@ -18,6 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Hoang Minh Thang - s3999925
+ */
+
 public class ScreenControllerTest {
     @Mock
     private ScreenDAO mockScreenDAO;

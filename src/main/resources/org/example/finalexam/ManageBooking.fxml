@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -27,8 +28,8 @@
             <children>
                 <AnchorPane prefHeight="540.0" prefWidth="200.0" style="-fx-background-color: #16404D;">
                     <children>
-                        <FontIcon iconColor="#f5f0e1" iconLiteral="fas-user" iconSize="85" layoutX="60.0" layoutY="169.0" selectionFill="#f5f0e1" />
-                        <Label alignment="CENTER" layoutX="16.0" layoutY="180.0" prefHeight="129.0" prefWidth="163.0" text="Welcome " textAlignment="CENTER" textFill="#f5f0e1" wrapText="true">
+                        <ImageView fx:id="iv_image" fitHeight="121.0" fitWidth="182.0" layoutX="5.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" layoutX="16.0" layoutY="180.0" prefHeight="129.0" prefWidth="163.0" text="Welcome Admin " textAlignment="CENTER" textFill="#f5f0e1" wrapText="true">
                             <font>
                                 <Font name="System Bold Italic" size="24.0" />
                             </font>

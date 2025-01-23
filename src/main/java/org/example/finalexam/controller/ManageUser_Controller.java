@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.finalexam.controller.pop_up.ViewBookingList_Controller;
 import org.example.finalexam.dao.UserDAO;
@@ -67,7 +69,8 @@ public class ManageUser_Controller implements Initializable {
     private TextField tf_search_name;
     @FXML
     private TextField tf_search_contact_info;
-
+    @FXML
+    public ImageView iv_image;
 
     private void setUPButton() {
         bt_return.setOnAction(e -> {
@@ -358,5 +361,7 @@ public class ManageUser_Controller implements Initializable {
         setupTableViewListeners();
         refreshTableViewListener();
         setupTextFieldFilter();
+
+        FXMLSupport.setImage(iv_image, "/org/example/finalexam/Image/user.png");
     }
 }

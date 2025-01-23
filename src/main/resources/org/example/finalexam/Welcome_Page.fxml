@@ -34,7 +34,7 @@
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font></Button>
-                  <Label alignment="CENTER" layoutX="89.0" layoutY="27.0" prefHeight="131.0" prefWidth="852.0" text="Assignment 3 - Lab test" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" layoutX="222.0" layoutY="34.0" prefHeight="131.0" prefWidth="556.0" text="Assignment 3 ----- Lab test    Movie Ticket Reservation System" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="System Bold Italic" size="36.0" />
                      </font>

@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.example.finalexam.dao.BookingDAO;
 import org.example.finalexam.dao.ScreenDAO;
 import org.example.finalexam.dao.UserDAO;
@@ -67,6 +69,8 @@ public class ManageBooking_Controller implements Initializable {
     private TextField tf_search_id;
     @FXML
     private TextField tf_search_screen_movie_name;
+    @FXML
+    private ImageView iv_image;
 
     private void setUPButton() {
         bt_return.setOnAction(e -> {
@@ -435,5 +439,7 @@ public class ManageBooking_Controller implements Initializable {
         refreshTableViewListener();
         loadData();
         setupTextFieldFilter();
+
+       FXMLSupport.setImage(iv_image,"/org/example/finalexam/Image/booking.png");
     }
 }
