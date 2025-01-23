@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.finalexam.controller.pop_up.ViewBookingList_Controller;
@@ -24,9 +23,7 @@ import org.example.finalexam.utils.FXMLSupport;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.example.finalexam.utils.FXMLSupport.showAlert;
@@ -266,6 +263,10 @@ public class ManageUser_Controller implements Initializable {
         try {
             List<User> users = userDAO.getAllUsers();
             userList.addAll(users);
+            // Creating a Comparator for sorting by id
+            Comparator<User> compareByID = Comparator.comparingInt(User::getId);
+            // Sorting the ObservableList using the Comparator
+            FXCollections.sort(userList, compareByID);
 
             Platform.runLater(() -> {
                 tableView.setItems(userList);
@@ -296,6 +297,10 @@ public class ManageUser_Controller implements Initializable {
                 // Fetch data from the database
                 List<User> users = userDAO.getAllUsers();
                 userList.addAll(users);
+                // Creating a Comparator for sorting by id
+                Comparator<User> compareByID = Comparator.comparingInt(User::getId);
+                // Sorting the ObservableList using the Comparator
+                FXCollections.sort(userList, compareByID);
                 return userList;
             }
             @Override

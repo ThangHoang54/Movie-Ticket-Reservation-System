@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.finalexam.controller.pop_up.ViewScreenList_Controller;
@@ -20,12 +19,12 @@ import org.example.finalexam.dao.TheaterDAO;
 import org.example.finalexam.daoImplement.TheaterController;
 import org.example.finalexam.model.Screen;
 import org.example.finalexam.model.Theater;
-import org.example.finalexam.model.User;
 import org.example.finalexam.utils.FXMLSupport;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -333,6 +332,10 @@ public class ManageTheater_Controller implements Initializable {
                 // Fetch data from the database
                 List<Theater> theaters = theaterDAO.getAllTheaters();
                 theaterList.addAll(theaters);
+                // Creating a Comparator for sorting by id
+                Comparator<Theater> compareByID = Comparator.comparingInt(Theater::getId);
+                // Sorting the ObservableList using the Comparator
+                FXCollections.sort(theaterList, compareByID);
                 return theaterList;
             }
             @Override
@@ -361,6 +364,10 @@ public class ManageTheater_Controller implements Initializable {
         try {
             List<Theater> theaters = theaterDAO.getAllTheaters();
             theaterList.addAll(theaters);
+            // Creating a Comparator for sorting by id
+            Comparator<Theater> compareByID = Comparator.comparingInt(Theater::getId);
+            // Sorting the ObservableList using the Comparator
+            FXCollections.sort(theaterList, compareByID);
 
             Platform.runLater(() -> {
                 tableView.setItems(theaterList);
@@ -384,6 +391,7 @@ public class ManageTheater_Controller implements Initializable {
 
         List<Theater> filteredTheaters = theaterList.stream()
                 .filter(property -> property.getName().toLowerCase().contains(name))
+                .sorted(Comparator.comparing(Theater::getName))
                 .filter(property -> property.getAddress().toLowerCase().contains(address))
                 .collect(Collectors.toList());
 

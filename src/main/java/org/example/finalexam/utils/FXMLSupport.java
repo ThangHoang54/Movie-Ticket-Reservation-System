@@ -90,5 +90,16 @@ public class FXMLSupport {
             super(message);
         }
     }
+
+//    public static void handleSwitchTheme(boolean isDarkMode, VBox rootPane) {
+//        isDarkMode = !isDarkMode;
+//        if (!isDarkMode) {
+//            rootPane.getStylesheets().remove("dark_theme_mode.css");
+//            rootPane.getStylesheets().add("light_theme_mode.css");
+//        } else {
+//            rootPane.getStylesheets().remove("light_theme_mode.css");
+//            rootPane.getStylesheets().add("dark_theme_mode.css");
+//        }
+//    }
 }
 

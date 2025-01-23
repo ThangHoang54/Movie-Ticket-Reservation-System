@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
  */
 
 public class WelcomePage_Controller implements Initializable {
+
     @FXML
     private Button bt_user;
     @FXML
@@ -29,7 +30,7 @@ public class WelcomePage_Controller implements Initializable {
      * Initializes the landing page controller.
      * Sets up button actions for navigation and application closure.
      *
-     * @param url            The location used to resolve relative paths for the root object, or null if not available.
+     * @param url The location used to resolve relative paths for the root object, or null if not available.
      * @param resourceBundle The resources used to localize the root object, or null if not available.
      */
     @Override
@@ -52,5 +53,6 @@ public class WelcomePage_Controller implements Initializable {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.close(); // Close the window
         });
+
     }
 }

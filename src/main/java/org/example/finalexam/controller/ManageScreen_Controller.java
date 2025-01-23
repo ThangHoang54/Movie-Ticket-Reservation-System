@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.finalexam.dao.ScreenDAO;
 import org.example.finalexam.dao.TheaterDAO;
@@ -22,8 +21,7 @@ import org.example.finalexam.utils.FXMLSupport;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.example.finalexam.utils.FXMLSupport.showAlert;
@@ -339,6 +337,10 @@ public class ManageScreen_Controller implements Initializable {
                 // Fetch data from the database
                 List<Screen> screens = screenDAO.getAllScreens();
                 screensList.addAll(screens);
+                // Creating a Comparator for sorting by id
+                Comparator<Screen> compareById = Comparator.comparingInt(Screen::getId);
+                // Sorting the ObservableList using the Comparator
+                FXCollections.sort(screensList, compareById);
                 return screensList;
             }
             @Override
@@ -367,6 +369,10 @@ public class ManageScreen_Controller implements Initializable {
         try {
             List<Screen> screens = screenDAO.getAllScreens();
             screensList.addAll(screens);
+            // Creating a Comparator for sorting by id
+            Comparator<Screen> compareByID = Comparator.comparingInt(Screen::getId);
+            // Sorting the ObservableList using the Comparator
+            FXCollections.sort(screensList, compareByID);
 
             Platform.runLater(() -> {
                 tableView.setItems(screensList);
@@ -389,6 +395,7 @@ public class ManageScreen_Controller implements Initializable {
 
         List<Screen> filteredScreens = screensList.stream()
                 .filter(property -> property.getMovie_name().toLowerCase().contains(movie_name))
+                .sorted(Comparator.comparingInt(Screen::getTiming))
                 .collect(Collectors.toList());
 
         tableView.setItems(FXCollections.observableList(filteredScreens));

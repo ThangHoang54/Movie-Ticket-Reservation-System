@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.finalexam.dao.BookingDAO;
 import org.example.finalexam.dao.ScreenDAO;
@@ -25,6 +24,7 @@ import org.example.finalexam.utils.FXMLSupport;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -360,6 +360,10 @@ public class ManageBooking_Controller implements Initializable {
                 // Fetch data from the database
                 List<Booking> bookings = bookingDAO.getAllBookings();
                 bookingList.addAll(bookings);
+                // Creating a Comparator for sorting by id
+                Comparator<Booking> compareByID = Comparator.comparingInt(Booking::getId);
+                // Sorting the ObservableList using the Comparator
+                FXCollections.sort(bookingList, compareByID);
                 return bookingList;
             }
             @Override
@@ -388,6 +392,10 @@ public class ManageBooking_Controller implements Initializable {
         try {
             List<Booking> bookings = bookingDAO.getAllBookings();
             bookingList.addAll(bookings);
+            // Creating a Comparator for sorting by id
+            Comparator<Booking> compareByID = Comparator.comparingInt(Booking::getId);
+            // Sorting the ObservableList using the Comparator
+            FXCollections.sort(bookingList, compareByID);
 
             Platform.runLater(() -> {
                 tableView.setItems(bookingList);
