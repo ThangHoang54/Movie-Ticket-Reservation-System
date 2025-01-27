@@ -22,7 +22,7 @@ public class UserService {
     public List<Booking> getBookingsByUserId(int userId) throws SQLException {
         List<Booking> bookings = new ArrayList<>();
         String query = """
-                SELECT B.id, B.reserved_seat, S.id, S.timing, S.movie_name, S.seat_available, U.id, U.name, U.contact_info, U.booking_history
+                SELECT B.id, B.reserved_seat, B.booking_date, S.id, S.timing, S.movie_name, S.seat_available, U.id, U.name, U.contact_info, U.booking_history
                 FROM Booking B
                 JOIN Screen S ON B.screen_id = S.id
                 JOIN User_ U ON B.user_id = U.id
@@ -73,6 +73,7 @@ public class UserService {
 
         builder.setID(rs.getInt("id"))
                 .setReserved_seat(rs.getInt("reserved_seat"))
+                .setBooking_date(rs.getDate("booking_date"))
                 .setUser(user)
                 .setScreen(screen)
                 .build();

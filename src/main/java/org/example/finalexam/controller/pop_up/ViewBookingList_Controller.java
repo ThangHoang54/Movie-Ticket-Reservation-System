@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.finalexam.model.Booking;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,11 +27,14 @@ public class ViewBookingList_Controller {
     @FXML
     private TableColumn<Booking, String> column_user_fullname;
     @FXML
+    private TableColumn<Booking, Date> column_booking_date;
+    @FXML
     private TableColumn<Booking, Integer> column_id;
 
     public void setupTableColumns() {
         column_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         column_reserved_seat.setCellValueFactory(new PropertyValueFactory<>("reserved_seat"));
+        column_booking_date.setCellValueFactory(new PropertyValueFactory<>("booking_date"));
         column_screen_movie_name.setCellValueFactory(cellDataFeatures -> {
             Booking booking = cellDataFeatures.getValue();
             return new SimpleStringProperty(booking.getScreen().getMovie_name());

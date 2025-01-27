@@ -1,5 +1,7 @@
 package org.example.finalexam.model;
 
+import java.util.Date;
+
 /**
  * @author Hoang Minh Thang - s3999925
  */
@@ -7,6 +9,7 @@ package org.example.finalexam.model;
 public class Booking {
     private int id;
     private int reserved_seat;
+    private Date booking_date;
     private Screen screen;
     private User user;
 
@@ -16,6 +19,9 @@ public class Booking {
     }
     public int getReserved_seat() {
         return reserved_seat;
+    }
+    public Date getBooking_date() {
+        return booking_date;
     }
     public Screen getScreen() {
         return screen;
@@ -27,6 +33,7 @@ public class Booking {
     private Booking(Booking.Builder builder) {
         id = builder.id;
         reserved_seat = builder.reserved_seat;
+        booking_date = builder.booking_date;
         user = builder.user;
         screen = builder.screen;
     }
@@ -34,6 +41,7 @@ public class Booking {
     public static class Builder {
         private int id;
         private int reserved_seat;
+        private Date booking_date;
         private Screen screen;
         private User user;
 
@@ -45,6 +53,10 @@ public class Booking {
         }
         public Booking.Builder setReserved_seat(int reserved_seat) {
             this.reserved_seat = reserved_seat;
+            return this;
+        }
+        public Booking.Builder setBooking_date(Date booking_date) {
+            this.booking_date = booking_date;
             return this;
         }
         public Booking.Builder setScreen(Screen screen) {

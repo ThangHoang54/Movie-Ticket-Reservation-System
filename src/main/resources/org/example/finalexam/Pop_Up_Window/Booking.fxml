@@ -27,10 +27,11 @@
                     <children>
                         <TableView fx:id="tableView" layoutX="-2.0" layoutY="65.33333333333333" prefHeight="269.0" prefWidth="600.0" style="-fx-background-color: #f5f0e1;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="65.0">
                             <columns>
-                                <TableColumn fx:id="column_id" prefWidth="52.666688323020935" text="ID" />
-                                <TableColumn fx:id="column_reserved_seat" prefWidth="132.00000381469727" text="Reserved Seat" />
-                                <TableColumn fx:id="column_screen_movie_name" prefWidth="222.6667022705078" text="Screen Movie Name" />
-                                <TableColumn fx:id="column_user_fullname" prefWidth="190.66665649414062" text="User Full Name" />
+                                <TableColumn fx:id="column_id" prefWidth="41.333314180374146" text="ID" />
+                                <TableColumn fx:id="column_reserved_seat" prefWidth="102.66662979125977" text="Reserved Seat" />
+                        <TableColumn fx:id="column_booking_date" prefWidth="113.333251953125" text="Booking Date" />
+                                <TableColumn fx:id="column_screen_movie_name" prefWidth="135.3333740234375" text="Screen Movie Name" />
+                                <TableColumn fx:id="column_user_fullname" prefWidth="209.33328247070312" text="User Full Name" />
                             </columns>
                         </TableView>
                         <Button layoutX="14.0" layoutY="14.0" onAction="#handleClose" prefHeight="30.0" text="Close">

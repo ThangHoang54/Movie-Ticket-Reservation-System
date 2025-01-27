@@ -18,7 +18,7 @@ public class BookingController implements BookingDAO {
     @Override
     public void addBooking(Booking booking) throws SQLException {
         String insertBooking = """
-                INSERT INTO Booking (reserved_seat, screen_id, user_id)
+                INSERT INTO Booking (reserved_seat, booking_date, screen_id, user_id)
                 VALUES (?, ?, ?)
                 """;
 
@@ -28,8 +28,9 @@ public class BookingController implements BookingDAO {
             try (PreparedStatement pstBooking = conn.prepareStatement(insertBooking, Statement.RETURN_GENERATED_KEYS)) {
 
                 pstBooking.setInt(1, booking.getReserved_seat());
-                pstBooking.setInt(2, booking.getScreen().getId());
-                pstBooking.setInt(3, booking.getUser().getId());
+                pstBooking.setInt(3, booking.getScreen().getId());
+                pstBooking.setInt(4, booking.getUser().getId());
+                pstBooking.setDate(2, new java.sql.Date(booking.getBooking_date().getTime()));
                 pstBooking.executeUpdate();
 
                 conn.commit();
@@ -46,7 +47,7 @@ public class BookingController implements BookingDAO {
     public void updateBooking(Booking booking) throws SQLException {
         String query = """
                 UPDATE Booking
-                SET reserved_seat = ?, screen_id = ?, theater_id = ?
+                SET reserved_seat = ?, booking_date = ?, screen_id = ?, theater_id = ?
                 WHERE id = ?
                 """;
 
@@ -54,8 +55,9 @@ public class BookingController implements BookingDAO {
              PreparedStatement pst = conn.prepareStatement(query)) {
 
             pst.setInt(1, booking.getReserved_seat());
-            pst.setInt(2, booking.getScreen().getId());
-            pst.setInt(3, booking.getUser().getId());
+            pst.setDate(2, new java.sql.Date(booking.getBooking_date().getTime()));
+            pst.setInt(3, booking.getScreen().getId());
+            pst.setInt(4, booking.getUser().getId());
             pst.executeUpdate();
         }
     }
@@ -75,7 +77,7 @@ public class BookingController implements BookingDAO {
     @Override
     public List<Booking> getAllBookings() throws SQLException {
         String query = """
-                SELECT B.id, B.reserved_seat, S.id, S.timing, S.movie_name, S.seat_available, U.id, U.name, U.contact_info, U.booking_history
+                SELECT B.id, B.reserved_seat, B.booking_date, S.id, S.timing, S.movie_name, S.seat_available, U.id, U.name, U.contact_info, U.booking_history
                 FROM Booking B
                 JOIN Screen S ON B.screen_id = S.id
                 JOIN User_ U ON B.user_id = U.id;
@@ -95,7 +97,7 @@ public class BookingController implements BookingDAO {
     @Override
     public Booking getBookingById(int id) throws SQLException {
         String query = """
-                SELECT B.id, B.reserved_seat, S.id, S.timing, S.movie_name, S.seat_available, U.id, U.name, U.contact_info, U.booking_history
+                SELECT B.id, B.reserved_seat, B.booking_date, S.id, S.timing, S.movie_name, S.seat_available, U.id, U.name, U.contact_info, U.booking_history
                 FROM Booking B
                 JOIN Screen S ON B.screen_id = S.id
                 JOIN User_ U ON B.user_id = U.id
@@ -144,6 +146,7 @@ public class BookingController implements BookingDAO {
 
         builder.setID(rs.getInt("id"))
                 .setReserved_seat(rs.getInt("reserved_seat"))
+                .setBooking_date(rs.getDate("booking_date"))
                 .setUser(user)
                 .setScreen(screen)
                 .build();

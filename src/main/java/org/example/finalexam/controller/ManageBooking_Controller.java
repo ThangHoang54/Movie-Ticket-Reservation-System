@@ -24,7 +24,9 @@ import org.example.finalexam.utils.FXMLSupport;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Comparator;
+import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -50,6 +52,8 @@ public class ManageBooking_Controller implements Initializable {
     @FXML
     private TableColumn<Booking, Integer> column_reserved_seat;
     @FXML
+    private TableColumn<Booking, Date> column_booking_date;
+    @FXML
     private TableColumn<Booking, String> column_screen_movie_name;
     @FXML
     private TableColumn<Booking, String> column_username;
@@ -61,6 +65,8 @@ public class ManageBooking_Controller implements Initializable {
     private TextField tf_id;
     @FXML
     private TextField tf_movie_name;
+    @FXML
+    private DatePicker dp_booking_date;
     @FXML
     private TextField tf_reserved_seat;
     @FXML
@@ -79,6 +85,7 @@ public class ManageBooking_Controller implements Initializable {
         bt_reset_field.setOnAction(e -> {
             tf_id.setText("");
             tf_movie_name.setText("");
+            dp_booking_date.setValue(null);
             tf_reserved_seat.setText("");
             tf_user_name.setText("");
         });
@@ -96,7 +103,7 @@ public class ManageBooking_Controller implements Initializable {
             progressBar.progressProperty().unbind(); // Unbind the progress property
             progressBar.setProgress(0); // Reset progress
 
-            if (tf_reserved_seat.getText().isEmpty() || tf_movie_name.getText().isEmpty() || tf_user_name.getText().isEmpty()) {
+            if (tf_reserved_seat.getText().isEmpty() || tf_movie_name.getText().isEmpty() || tf_user_name.getText().isEmpty() || dp_booking_date.getValue() == null) {
                 showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in all text fields except an id text field.");
                 progressBar.setVisible(false);
                 return;
@@ -113,6 +120,7 @@ public class ManageBooking_Controller implements Initializable {
                         int reserved_seat = Integer.parseInt(tf_reserved_seat.getText());
                         String movie_name = tf_movie_name.getText();
                         String user_name = tf_user_name.getText();
+                        Date booking_date = Date.valueOf(dp_booking_date.getValue());
 
                         int screenID; int userID;
                         try {
@@ -141,6 +149,7 @@ public class ManageBooking_Controller implements Initializable {
 
                         Booking booking = new Booking.Builder()
                                 .setReserved_seat(reserved_seat)
+                                .setBooking_date(booking_date)
                                 .setScreen(screen)
                                 .setUser(user)
                                 .build();
@@ -190,7 +199,7 @@ public class ManageBooking_Controller implements Initializable {
             progressBar.progressProperty().unbind(); // Unbind the progress property
             progressBar.setProgress(0); // Reset progress
 
-            if (tf_reserved_seat.getText().isEmpty() || tf_movie_name.getText().isEmpty() || tf_user_name.getText().isEmpty()) {
+            if (tf_reserved_seat.getText().isEmpty() || tf_movie_name.getText().isEmpty() || tf_user_name.getText().isEmpty() || dp_booking_date.getValue() == null) {
                 showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in all text fields except an id text field.");
                 progressBar.setVisible(false);
                 return;
@@ -207,6 +216,7 @@ public class ManageBooking_Controller implements Initializable {
                     int reserved_seat = Integer.parseInt(tf_reserved_seat.getText());
                     String movie_name = tf_movie_name.getText();
                     String user_name = tf_user_name.getText();
+                    Date booking_date = Date.valueOf(dp_booking_date.getValue());
 
                     Booking currentBooking = bookingDAO.getBookingById(id);
                     if (currentBooking == null) {
@@ -241,6 +251,7 @@ public class ManageBooking_Controller implements Initializable {
 
                     Booking booking = new Booking.Builder()
                             .setReserved_seat(reserved_seat)
+                            .setBooking_date(booking_date)
                             .setScreen(screen)
                             .setUser(user)
                             .build();
@@ -325,6 +336,7 @@ public class ManageBooking_Controller implements Initializable {
     private void setupTableColumns() {
         column_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         column_reserved_seat.setCellValueFactory(new PropertyValueFactory<>("reserved_seat"));
+        column_booking_date.setCellValueFactory(new PropertyValueFactory<>("booking_date"));
         column_username.setCellValueFactory(cellDataFeatures -> {
             Booking booking = cellDataFeatures.getValue();
             return new SimpleStringProperty(booking.getUser().getName());
@@ -341,6 +353,7 @@ public class ManageBooking_Controller implements Initializable {
                 // Set text on the text field
                 tf_id.setText(String.valueOf(newSelection.getId()));
                 tf_reserved_seat.setText(String.valueOf(newSelection.getReserved_seat()));
+                dp_booking_date.setValue(LocalDate.parse(newSelection.getBooking_date().toString()));
                 tf_user_name.setText(newSelection.getUser().getName());
                 tf_movie_name.setText(newSelection.getScreen().getMovie_name());
             }

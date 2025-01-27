@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
@@ -59,15 +60,15 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="540.0" prefWidth="375.0" style="-fx-background-color: #FBF5DD;">
                     <children>
-                        <Button layoutX="24.0" layoutY="205.0" mnemonicParsing="false" onAction="#addBooking" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #DDA853;" text="Add" textFill="#313130">
+                        <Button layoutX="24.0" layoutY="247.0" mnemonicParsing="false" onAction="#addBooking" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #DDA853;" text="Add" textFill="#313130">
                             <font>
                                 <Font name="System Bold Italic" size="12.0" />
                             </font></Button>
-                        <Button layoutX="142.0" layoutY="205.0" mnemonicParsing="false" onAction="#updateBooking" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: A6CDC6;" text="Update" textFill="#f5f0e1">
+                        <Button layoutX="143.0" layoutY="247.0" mnemonicParsing="false" onAction="#updateBooking" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: A6CDC6;" text="Update" textFill="#f5f0e1">
                             <font>
                                 <Font name="System Bold Italic" size="12.0" />
                             </font></Button>
-                        <Button layoutX="260.0" layoutY="205.0" mnemonicParsing="false" onAction="#deleteBooking" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #DDA853;" text="Delete" textFill="#2d2c2c">
+                        <Button layoutX="260.0" layoutY="247.0" mnemonicParsing="false" onAction="#deleteBooking" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #DDA853;" text="Delete" textFill="#2d2c2c">
                             <font>
                                 <Font name="System Bold Italic" size="12.0" />
                             </font></Button>
@@ -76,19 +77,19 @@
                             <Font name="System Bold Italic" size="12.0" />
                          </font>
                       </Label>
-                      <Label layoutX="18.0" layoutY="103.0" text="Screen Movie Name">
+                      <Label layoutX="18.0" layoutY="142.0" text="Screen Movie Name">
                          <font>
                             <Font name="System Bold Italic" size="12.0" />
                          </font>
                       </Label>
-                      <Label layoutX="42.0" layoutY="142.0" text="User Full Name">
+                      <Label layoutX="38.0" layoutY="188.0" text="User Full Name">
                          <font>
                             <Font name="System Bold Italic" size="12.0" />
                          </font>
                       </Label>
                       <TextField fx:id="tf_id" editable="false" layoutX="152.0" layoutY="20.0" />
-                      <TextField fx:id="tf_movie_name" layoutX="151.0" layoutY="99.0" />
-                      <TextField fx:id="tf_user_name" layoutX="150.0" layoutY="141.0" />
+                      <TextField fx:id="tf_movie_name" layoutX="152.0" layoutY="138.0" />
+                      <TextField fx:id="tf_user_name" layoutX="152.0" layoutY="184.0" />
                   <TextField fx:id="tf_reserved_seat" layoutX="151.0" layoutY="57.0" />
                   <Label layoutX="42.0" layoutY="61.0" text="Reserved Seat">
                      <font>
@@ -116,6 +117,12 @@
                                 <TextField fx:id="tf_search_screen_movie_name" layoutX="132.0" layoutY="119.0" prefHeight="25.0" prefWidth="173.0" promptText="Search by movie name" />
                             </children>
                         </AnchorPane>
+                  <Label layoutX="43.0" layoutY="104.0" text="Booking Date">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dp_booking_date" layoutX="153.0" layoutY="97.0" />
                 </children>
                 </AnchorPane>
             <AnchorPane prefHeight="540.0" prefWidth="530.0" style="-fx-background-color: #A6CDC6;">
@@ -123,9 +130,10 @@
                   <TableView fx:id="tableView" layoutX="37.0" layoutY="55.0" prefHeight="529.0" prefWidth="423.0" style="-fx-background-color: #FBF5DD;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                     <columns>
                       <TableColumn fx:id="column_id" prefWidth="52.666688323020935" text="ID" />
-                      <TableColumn fx:id="column_reserved_seat" prefWidth="132.00000381469727" text="Reserved Seat" />
-                        <TableColumn fx:id="column_screen_movie_name" prefWidth="174.66661071777344" text="Screen Movie Name" />
-                        <TableColumn fx:id="column_username" prefWidth="151.33346557617188" text="User Full Name" />
+                      <TableColumn fx:id="column_reserved_seat" prefWidth="92.66669082641602" text="Reserved Seat" />
+                        <TableColumn fx:id="column_booking_date" prefWidth="88.666748046875" text="Booking Date" />
+                        <TableColumn fx:id="column_screen_movie_name" prefWidth="141.33323669433594" text="Screen Movie Name" />
+                        <TableColumn fx:id="column_username" prefWidth="136.00009155273438" text="User Full Name" />
                     </columns>
                   </TableView>
                </children>

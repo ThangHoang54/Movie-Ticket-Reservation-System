@@ -15,7 +15,7 @@ public class DatabaseConnection {
 
     static {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:postgresql://aws-0-us-east-2.pooler.supabase.com:6543/postgres?user=postgres.hxzgmnjtldqraspjhbdo&password=x!aUah55x8pqYME&prepareThreshold=0");
+        config.setJdbcUrl("jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:6543/postgres?user=postgres.oedvqryybzgfoaapesbk&password=x!aUah55x8pqYME&prepareThreshold=0");
         config.setUsername("postgres");
         config.setPassword("x!aUah55x8pqYME");
         config.setMaximumPoolSize(15);
