@@ -30,8 +30,9 @@
                                 <TableColumn fx:id="column_id" prefWidth="52.666688323020935" text="ID" />
                                 <TableColumn fx:id="column_timing" prefWidth="132.00000381469727" text="Timing" />
                                 <TableColumn fx:id="column_movie_name" prefWidth="135.3332977294922" text="Movie Name" />
-                                <TableColumn fx:id="column_seat_available" prefWidth="122.66668701171875" text="Seat Available" />
-                                <TableColumn fx:id="column_theater_name" prefWidth="155.33340454101562" text="Theater Name" />
+                                <TableColumn fx:id="column_price" prefWidth="48.66668701171875" text="Price" />
+                                <TableColumn fx:id="column_seat_available" prefWidth="115.33331298828125" text="Seat Available" />
+                                <TableColumn fx:id="column_theater_name" prefWidth="114.66665649414062" text="Theater Name" />
                             </columns>
                         </TableView>
                         <Button layoutX="14.0" layoutY="14.0" onAction="#handleClose" prefHeight="30.0" text="Close">
