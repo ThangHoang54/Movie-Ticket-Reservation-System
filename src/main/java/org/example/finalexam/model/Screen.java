@@ -8,6 +8,7 @@ public class Screen {
     private int id;
     private int timing;
     private String movie_name;
+    private double price;
     private int seat_available;
     private Theater theater;
 
@@ -20,6 +21,9 @@ public class Screen {
     public String getMovie_name() {
         return movie_name;
     }
+    public double getPrice() {
+        return price;
+    }
     public int getSeat_available() {
         return seat_available;
     }
@@ -31,6 +35,7 @@ public class Screen {
         id = builder.id;
         timing = builder.timing;
         movie_name = builder.movie_name;
+        price = builder.price;
         seat_available = builder.seat_available;
         theater = builder.theater;
     }
@@ -39,6 +44,7 @@ public class Screen {
         private int id;
         private int timing;
         private String movie_name;
+        private double price;
         private int seat_available;
         private Theater theater;
 
@@ -54,6 +60,10 @@ public class Screen {
         }
         public Builder setMovieName(String movie_name) {
             this.movie_name = movie_name;
+            return this;
+        }
+        public Builder setPrice(double price) {
+            this.price = price;
             return this;
         }
         public Builder setSeatAvailable(int seat_available) {

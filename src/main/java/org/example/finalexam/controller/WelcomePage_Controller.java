@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 
 public class WelcomePage_Controller implements Initializable {
 
+    public Button bt_book_movie_ticket;
     @FXML
     private Button bt_user;
     @FXML
@@ -46,6 +47,9 @@ public class WelcomePage_Controller implements Initializable {
         );
         bt_theater.setOnAction(event ->
                 FXMLSupport.changeScene(event, "/org/example/finalexam/ManageTheater.fxml", "Manage Theater")
+        );
+        bt_book_movie_ticket.setOnAction(event ->
+                FXMLSupport.changeScene(event, "/org/example/finalexam/PreBookingTicket_Page.fxml", "Ticket Reservation Account")
         );
         // Close the app when user click on "Exit Application button"
         bt_exits.setOnAction(event ->{

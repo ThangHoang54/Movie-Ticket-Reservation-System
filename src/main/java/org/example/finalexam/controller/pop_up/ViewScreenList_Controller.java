@@ -28,12 +28,15 @@ public class ViewScreenList_Controller {
     @FXML
     private TableColumn<Screen, Integer> column_timing;
     @FXML
+    private TableColumn<Screen, Double> column_price;
+    @FXML
     private TableView<Screen> tableView;
 
     public void setupTableColumns() {
         column_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         column_timing.setCellValueFactory(new PropertyValueFactory<>("timing"));
         column_movie_name.setCellValueFactory(new PropertyValueFactory<>("movie_name"));
+        column_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         column_seat_available.setCellValueFactory(new PropertyValueFactory<>("seat_available"));
         column_theater_name.setCellValueFactory(cellDataFeatures -> {
             Screen screen = cellDataFeatures.getValue();
