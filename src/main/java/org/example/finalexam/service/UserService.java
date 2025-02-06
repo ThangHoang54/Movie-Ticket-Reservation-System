@@ -30,8 +30,8 @@ public class UserService {
                 JOIN User_ U1 ON U1.id = UB.user_id
                 WHERE U1.id = ?;
                 """;
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);) {
+        try (Connection conn = DatabaseConnection.getConnection()){
+             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, userId);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -60,6 +60,7 @@ public class UserService {
         builder.setId(rs.getInt("id"))
                 .setTiming(rs.getInt("timing"))
                 .setMovieName(rs.getString("movie_name"))
+                .setPrice(rs.getDouble("price"))
                 .setSeatAvailable(rs.getInt("seat_available"))
                 .build();
 

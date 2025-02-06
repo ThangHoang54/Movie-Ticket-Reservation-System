@@ -48,7 +48,7 @@ public class DatabaseConnectionTest {
     @Test
     public void testGetConnection_Success() throws SQLException {
         when(mockDataSource.getConnection()).thenReturn(mockConnection);
-        DatabaseConnection.setDataSource(mockDataSource);
+        //DatabaseConnection.setDataSource(mockDataSource);
         Connection conn = DatabaseConnection.getConnection();
         Assertions.assertNotNull(conn);
         Assertions.assertSame(mockConnection, conn);
@@ -60,7 +60,7 @@ public class DatabaseConnectionTest {
      */
     @Test
     public void testCloseDataSource_Success() {
-        DatabaseConnection.setDataSource(mockDataSource);
+        //DatabaseConnection.setDataSource(mockDataSource);
         DatabaseConnection.closeDataSource();
         verify(mockDataSource, times(1)).close();
     }
@@ -71,7 +71,7 @@ public class DatabaseConnectionTest {
      */
     @Test
     public void testCloseDataSource_NullDataSource() {
-        DatabaseConnection.setDataSource(null);
+        //DatabaseConnection.setDataSource(null);
         Assertions.assertDoesNotThrow(DatabaseConnection::closeDataSource);
         verify(mockDataSource, never()).close();
     }

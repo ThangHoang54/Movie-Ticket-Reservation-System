@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.finalexam.controller.SignIn_Controller">
+    <children>
+        <AnchorPane prefHeight="600.0" prefWidth="320.0" style="-fx-background-color: #16404D;">
+            <children>
+                <HBox prefHeight="30.0" prefWidth="320.0" style="-fx-background-color: #DDA853;" />
+            <FontIcon caretBias="false" fill="#fbf5dd" iconLiteral="fas-users" iconSize="96" layoutX="103.0" layoutY="250.0" selectionEnd="1" selectionStart="1" wrappingWidth="114.00000000000023" />
+            <Label alignment="CENTER" layoutX="64.0" layoutY="300.0" prefHeight="132.0" prefWidth="191.0" text="Movie Ticket Reservation System" textAlignment="CENTER" textFill="#f8f5f5cc" wrapText="true">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="60.0" layoutY="55.0" text="Return" textFill="#f6f3f3">
+                <font>
+                    <Font name="System Bold Italic" size="14.0" />
+                </font>
+            </Label>
+            <Button fx:id="bt_return" layoutX="7.0" layoutY="46.0" mnemonicParsing="false">
+                <graphic>
+                    <FontIcon iconLiteral="far-arrow-alt-circle-left" iconSize="24" text="" />
+                </graphic>
+            </Button>
+            <Label layoutX="18.0" layoutY="562.0" text="Created by Hoang Minh Thang _ s3999925" textFill="#f4efef">
+                <font>
+                    <Font name="System Bold Italic" size="14.0" />
+                </font>
+            </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #FBF5DD;">
+            <children>
+                <Button fx:id="bt_login" layoutX="310.0" layoutY="378.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="266.0" style="-fx-background-color: #A6CDC6;" text="Sign in" textFill="#090909">
+                    <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                    </font>
+                </Button>
+                <Label layoutX="318.0" layoutY="212.0" text="Full Name" textFill="#000000cc">
+                    <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                    </font>
+                </Label>
+                <Label layoutX="319.0" layoutY="261.0" text="Email">
+                    <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="tf_fullname" layoutX="424.0" layoutY="209.0" promptText="Your Fullname" />
+                <Label layoutX="392.0" layoutY="436.0" text="Not yet a member?">
+                    <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                    </font>
+                </Label>
+                <Button fx:id="bt_sign_up" layoutX="511.0" layoutY="432.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Sign up!" textFill="#a6cdc6" underline="true">
+                    <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                    </font>
+                </Button>
+                <HBox layoutX="1.0" prefHeight="30.0" prefWidth="780.0" style="-fx-background-color: #DDA853;" AnchorPane.leftAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="780.0" text="COSC2440|COSC2731 Further Programming (S3, 2024)" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
+               </children></HBox>
+                <Label alignment="CENTER" layoutX="273.0" layoutY="76.0" prefHeight="124.0" prefWidth="301.0" text="Welcome Back" textAlignment="CENTER" textFill="#16404dcc" wrapText="true">
+                    <font>
+                        <Font name="System Bold Italic" size="36.0" />
+                    </font>
+                </Label>
+            <TextField fx:id="tf_email" layoutX="424.0" layoutY="258.0" promptText=" Your Email" />
+            </children>
+        </AnchorPane>
+    </children>
+</HBox>

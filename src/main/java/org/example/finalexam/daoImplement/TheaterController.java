@@ -87,7 +87,17 @@ public class TheaterController implements TheaterDAO {
             ResultSet rs = ps.executeQuery(query);
 
             while (rs.next()) {
-                return buildTheater(rs);
+                String name = rs.getString("name");
+                String address = rs.getString("address");
+
+                List<Screen> screens = theaterService.getScreenByTheaterId(theaterID);
+
+                return new Theater.Builder()
+                        .setID(theaterID)
+                        .setName(name)
+                        .setAddress(address)
+                        .setScreens(screens)
+                        .build();
             }
         }
         return null;
@@ -96,14 +106,33 @@ public class TheaterController implements TheaterDAO {
     @Override
     public List<Theater> getAllTheaters() throws SQLException {
         List<Theater> theaters = new ArrayList<>();
-        String query = "SELECT * FROM Theater";
+        String query = "SELECT T.id, T.name, T.address FROM Theater T";
 
         try (Connection conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery()){
+            // First, collect all theater IDs
             while (rs.next()) {
-                theaters.add(buildTheater(rs));
+                int theaterID = rs.getInt("id");
+                String name = rs.getString("name");
+                String address = rs.getString("address");
+
+                // Create a temporary Theater object without screen
+                Theater newTheater = new Theater.Builder()
+                        .setID(theaterID)
+                        .setName(name)
+                        .setAddress(address)
+                        .build();
+                theaters.add(newTheater);
             }
+            // Now fetch screens for all theaters
+            for (Theater theater : theaters) {
+                List<Screen> screens = theaterService.getScreenByTheaterId(theater.getId());
+                theater.setScreens(screens); // then set screens to each theater
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
         }
         return theaters;
     }
@@ -120,18 +149,5 @@ public class TheaterController implements TheaterDAO {
             }
         }
         return -1;
-    }
-
-    private Theater buildTheater(ResultSet rs) throws SQLException {
-        Theater.Builder builder = new Theater.Builder();
-
-        List<Screen> screens = theaterService.getScreenByTheaterId(rs.getInt("id"));
-        builder.setID(rs.getInt("id"))
-                .setName(rs.getString("name"))
-                .setAddress(rs.getString("address"))
-                .setScreens(screens)
-                .build();
-
-        return builder.build();
     }
 }

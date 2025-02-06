@@ -27,11 +27,11 @@
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font></Button>
-                  <Button fx:id="bt_booking" layoutX="440.0" layoutY="247.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Manage Booking">
+                  <Button fx:id="bt_booking" layoutX="440.0" layoutY="231.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Manage Booking">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font></Button>
-                  <Button fx:id="bt_screen" layoutX="440.0" layoutY="310.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Manage Screen" textAlignment="CENTER">
+                  <Button fx:id="bt_screen" layoutX="440.0" layoutY="274.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Manage Screen" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font></Button>
@@ -40,17 +40,17 @@
                         <Font name="System Bold Italic" size="36.0" />
                      </font>
                   </Label>
-                  <Button fx:id="bt_exits" layoutX="441.0" layoutY="488.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Exits Application" textAlignment="CENTER">
+                  <Button fx:id="bt_exits" layoutX="441.0" layoutY="404.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Exits Application" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="bt_theater" layoutX="441.0" layoutY="377.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Manage Theater" textAlignment="CENTER">
+                  <Button fx:id="bt_theater" layoutX="441.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Manage Theater" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="bt_book_movie_ticket" layoutX="441.0" layoutY="434.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Book a Ticket" textAlignment="CENTER">
+                  <Button fx:id="bt_book_movie_ticket" layoutX="441.0" layoutY="360.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #A6CDC6;" text="Book a Ticket" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font>

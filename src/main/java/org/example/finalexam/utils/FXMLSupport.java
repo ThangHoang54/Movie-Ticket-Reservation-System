@@ -1,5 +1,6 @@
 package org.example.finalexam.utils;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,8 +10,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.example.finalexam.model.User;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -60,6 +63,37 @@ public class FXMLSupport {
         if (root != null) {
             stage.setScene(new Scene(root));
             stage.show();
+        }
+    }
+
+    /** * Loads an FXML file and initializes the controller with a persistent Person data.
+     * @param <T> the type parameter of the controller
+     * @param event the ActionEvent triggering the load
+     * @param person the Person object to be passed to the controller
+     * @param path the path to the FXML file
+     * @param title the title for the new stage/window */
+    public static <T> void loadWithPersistentUser(ActionEvent event, User person, String path, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLSupport.class.getResource(path));
+            Parent root = loader.load();
+
+            T controller = loader.getController();
+            Method setPersonMethod = controller.getClass().getMethod("setUser", User.class);
+            Platform.runLater(() -> {
+                try {
+                    setPersonMethod.invoke(controller, person);
+                } catch (Exception e) {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Could not load persistent User data.");
+                }
+            });
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle(title); // set title for screen
+            stage.setScene(new Scene(root));
+            stage.setResizable(false); // Unable to resize
+            stage.show();
+        } catch (IOException | NoSuchMethodException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not load persistent User data.");
         }
     }
 

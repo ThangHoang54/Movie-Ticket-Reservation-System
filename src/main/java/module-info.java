@@ -12,4 +12,5 @@ module org.example.finalexam {
     exports org.example.finalexam.model;
     exports org.example.finalexam;
     opens org.example.finalexam.model to java.base;
+    exports org.example.finalexam.controller;
 }

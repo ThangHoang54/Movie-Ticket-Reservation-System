@@ -72,11 +72,31 @@ public class UserController implements UserDAO {
     public List<User> getAllUsers() throws SQLException {
         List<User> users = new ArrayList<>();
         String query = "SELECT U.id, U.name, U.contact_info, U.booking_history FROM User_ U";
+
         try (Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery()){
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+
+            // First, collect all user IDs
             while (rs.next()) {
-                users.add(buildUser(rs));
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String contact_info = rs.getString("contact_info");
+                String booking_history = rs.getString("booking_history");
+
+                // Create a temporary User object without bookings
+                User new_user = new User.Builder()
+                        .setID(id)
+                        .setName(name)
+                        .setBookingHistory(booking_history)
+                        .setContactInfo(contact_info)
+                        .build();
+                users.add(new_user);
+            }
+            // Now fetch bookings for all users
+            for (User user : users) {
+                List<Booking> bookings = userService.getBookingsByUserId(user.getId());
+                user.setBookings(bookings); // then set bookings to each user
             }
         }
         return users;
@@ -90,7 +110,20 @@ public class UserController implements UserDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return buildUser(rs);
+                int iD = rs.getInt("id");
+                String name = rs.getString("name");
+                String contact_info = rs.getString("contact_info");
+                String booking_history = rs.getString("booking_history");
+
+                List<Booking> bookings = userService.getBookingsByUserId(id);
+
+                return new User.Builder()
+                        .setID(iD)
+                        .setName(name)
+                        .setBookingHistory(booking_history)
+                        .setContactInfo(contact_info)
+                        .setBookings(bookings)
+                        .build();
             }
         }
         return null;
@@ -108,21 +141,5 @@ public class UserController implements UserDAO {
             }
         }
         return -1;
-    }
-
-    private User buildUser(ResultSet rs) throws SQLException {
-        User.Builder builder = new User.Builder();
-
-        int id = rs.getInt("id");
-        List<Booking> bookings = userService.getBookingsByUserId(id);
-
-        builder.setID(id)
-                .setName(rs.getString("name"))
-                .setBookingHistory(rs.getString("booking_history"))
-                .setContactInfo(rs.getString("contact_info"))
-                .setBookings(bookings)
-                .build();
-
-        return builder.build();
     }
 }

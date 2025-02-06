@@ -127,9 +127,9 @@
                         <TableView fx:id="tableView" layoutX="37.0" layoutY="55.0" prefHeight="529.0" prefWidth="423.0" style="-fx-background-color: #FBF5DD;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                             <columns>
                                 <TableColumn fx:id="column_id" prefWidth="52.666688323020935" text="ID" />
-                                <TableColumn fx:id="column_fullname" prefWidth="132.00000381469727" text="Full name" />
-                                <TableColumn fx:id="colunm_contact_info" prefWidth="108.66673278808594" text="Contact Info" />
-                                <TableColumn fx:id="column_booking_history" prefWidth="217.33334350585938" text="Booking History" />
+                                <TableColumn fx:id="column_fullname" prefWidth="118.66656875610352" text="Full name" />
+                                <TableColumn fx:id="colunm_contact_info" prefWidth="206.66661071777344" text="Contact Info" />
+                                <TableColumn fx:id="column_booking_history" prefWidth="136.66671752929688" text="Booking History" />
                             </columns>
                         </TableView>
                     </children>

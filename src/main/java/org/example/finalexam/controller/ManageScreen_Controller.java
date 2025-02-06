@@ -65,6 +65,8 @@ public class ManageScreen_Controller implements Initializable {
     @FXML
     private TextField tf_timing;
     @FXML
+    private TextField tf_price;
+    @FXML
     private TextField tf_search_movie_name;
     @FXML
     private ImageView iv_image;
@@ -79,6 +81,7 @@ public class ManageScreen_Controller implements Initializable {
             tf_seat_available.setText("");
             tf_theater_name.setText("");
             tf_timing.setText("");
+            tf_price.setText("");
         });
     }
 
@@ -93,7 +96,7 @@ public class ManageScreen_Controller implements Initializable {
             progressBar.progressProperty().unbind(); // Unbind the progress property
             progressBar.setProgress(0); // Reset progress
 
-            if (tf_timing.getText().isEmpty() || tf_movie_name.getText().isEmpty() || tf_seat_available.getText().isEmpty() || tf_theater_name.getText().isEmpty()) {
+            if (tf_timing.getText().isEmpty() || tf_movie_name.getText().isEmpty() || tf_seat_available.getText().isEmpty() || tf_theater_name.getText().isEmpty() || tf_price.getText().isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in all text fields except an id text field.");
                 progressBar.setVisible(false);
                 return;
@@ -111,6 +114,7 @@ public class ManageScreen_Controller implements Initializable {
                         String movie_name = tf_movie_name.getText();
                         int seat_available = Integer.parseInt(tf_seat_available.getText());
                         String theater_name = tf_theater_name.getText();
+                        double price = Double.parseDouble(tf_price.getText());
 
                         int theaterID;
                         try {
@@ -128,6 +132,7 @@ public class ManageScreen_Controller implements Initializable {
                         Screen screen = new Screen.Builder()
                                 .setTiming(timing)
                                 .setMovieName(movie_name)
+                                .setPrice(price)
                                 .setSeatAvailable(seat_available)
                                 .setTheater(theater)
                                 .build();
@@ -225,7 +230,7 @@ public class ManageScreen_Controller implements Initializable {
             progressBar.progressProperty().unbind(); // Unbind the progress property
             progressBar.setProgress(0); // Reset progress
 
-            if (tf_timing.getText().isEmpty() || tf_movie_name.getText().isEmpty() || tf_seat_available.getText().isEmpty() || tf_theater_name.getText().isEmpty()) {
+            if (tf_timing.getText().isEmpty() || tf_movie_name.getText().isEmpty() || tf_seat_available.getText().isEmpty() || tf_theater_name.getText().isEmpty() || tf_price.getText().isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in all text fields except an id text field.");
                 progressBar.setVisible(false);
                 return;
@@ -243,6 +248,7 @@ public class ManageScreen_Controller implements Initializable {
                     String movie_name = tf_movie_name.getText();
                     int seat_available = Integer.parseInt(tf_seat_available.getText());
                     String theater_name = tf_theater_name.getText();
+                    double price = Double.parseDouble(tf_price.getText());
 
                     Screen currentScreen = screenDAO.getScreenById(id);
                     if (currentScreen == null) {
@@ -267,6 +273,7 @@ public class ManageScreen_Controller implements Initializable {
                             .setId(id)
                             .setTiming(timing)
                             .setMovieName(movie_name)
+                            .setPrice(price)
                             .setSeatAvailable(seat_available)
                             .setTheater(theater)
                             .build();
@@ -320,6 +327,7 @@ public class ManageScreen_Controller implements Initializable {
                 tf_movie_name.setText(newSelection.getMovie_name());
                 tf_seat_available.setText(String.valueOf(newSelection.getSeat_available()));
                 tf_theater_name.setText(newSelection.getTheater().getName());
+                tf_price.setText(String.valueOf(newSelection.getPrice()));
             }
         });
     }
@@ -337,6 +345,7 @@ public class ManageScreen_Controller implements Initializable {
                 // Fetch data from the database
                 List<Screen> screens = screenDAO.getAllScreens();
                 screensList.addAll(screens);
+
                 // Creating a Comparator for sorting by id
                 Comparator<Screen> compareById = Comparator.comparingInt(Screen::getId);
                 // Sorting the ObservableList using the Comparator

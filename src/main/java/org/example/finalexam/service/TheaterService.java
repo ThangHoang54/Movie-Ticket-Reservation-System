@@ -14,19 +14,19 @@ import java.util.List;
 
 public class TheaterService {
 
-    public List<Screen> getScreenByTheaterId(int Id) throws SQLException {
+    public List<Screen> getScreenByTheaterId(int id) throws SQLException {
         List<Screen> screens = new ArrayList<>();
         String query = """
-                SELECT S.id, S.timing, S.movie_name, S.seat_available, T.id, T.name, T.address
+                SELECT S.id, S.timing, S.movie_name, S.price, S.seat_available, T.id, T.name, T.address
                 FROM Screen S
                 JOIN Theater T ON S.theater_id = T.id
                 JOIN theater_screen TS ON S.id = TS.screen_id
                 JOIN Theater T1 ON T1.id = TS.theater_id
                 WHERE T1.id = ?;
                 """;
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);){
-          stmt.setInt(1, Id);
+        try (Connection conn = DatabaseConnection.getConnection()) {
+             PreparedStatement stmt = conn.prepareStatement(query);
+          stmt.setInt(1, id);
           try (ResultSet rs = stmt.executeQuery()){
               while (rs.next()) {
                   screens.add(buildScreen(rs));
@@ -42,6 +42,7 @@ public class TheaterService {
 
         builder.setId(rs.getInt("id"))
                 .setMovieName(rs.getString("movie_name"))
+                .setPrice(rs.getDouble("price"))
                 .setSeatAvailable(rs.getInt("seat_available"))
                 .setTiming(rs.getInt("timing"))
                 .setTheater(theater)

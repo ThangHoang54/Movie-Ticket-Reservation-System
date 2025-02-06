@@ -17,8 +17,8 @@ public class ScreenController implements ScreenDAO {
     @Override
     public void addScreen(Screen screen) throws SQLException {
         String insertScreen = """
-                INSERT INTO Screen (timimg, movie_name, seat_available, theater_id)
-                VALUES (?, ?, ?)
+                INSERT INTO Screen (timimg, movie_name, price, seat_available, theater_id)
+                VALUES (?, ?, ?, ?, ?)
                 """;
 
         try (Connection conn = DatabaseConnection.getConnection()) {
@@ -28,8 +28,9 @@ public class ScreenController implements ScreenDAO {
 
                 pstScreen.setInt(1, screen.getTiming());
                 pstScreen.setString(2, screen.getMovie_name());
-                pstScreen.setInt(3, screen.getSeat_available());
-                pstScreen.setInt(4, screen.getTheater().getId());
+                pstScreen.setDouble(3, screen.getPrice());
+                pstScreen.setInt(4, screen.getSeat_available());
+                pstScreen.setInt(5, screen.getTheater().getId());
                 pstScreen.executeUpdate();
 
                 conn.commit();
@@ -45,7 +46,7 @@ public class ScreenController implements ScreenDAO {
     @Override
     public Screen getScreenById(int id) throws SQLException {
         String query = """
-                SELECT S.id, S.timing, S.movie_name, S.seat_available, T.id, T.name, T.address
+                SELECT S.id, S.timing, S.movie_name, S.price S.seat_available, T.id, T.name, T.address
                 FROM Screen S
                 JOIN Theater T ON S.theater_id = T.id 
                 WHERE S.id = ?;
@@ -66,7 +67,7 @@ public class ScreenController implements ScreenDAO {
     public void updateScreen(Screen screen) throws SQLException {
         String query = """
                 UPDATE Screen
-                SET timing = ?, movie_name = ?, seat_available = ?, theater_id = ?
+                SET timing = ?, movie_name = ?, price = ?, seat_available = ?, theater_id = ?
                 WHERE id = ?
                 """;
 
@@ -75,8 +76,9 @@ public class ScreenController implements ScreenDAO {
 
             pst.setInt(1, screen.getTiming());
             pst.setString(2, screen.getMovie_name());
-            pst.setInt(3, screen.getSeat_available());
-            pst.setInt(4, screen.getTheater().getId());
+            pst.setDouble(3, screen.getPrice());
+            pst.setInt(4, screen.getSeat_available());
+            pst.setInt(5, screen.getTheater().getId());
             pst.executeUpdate();
         }
     }
@@ -97,7 +99,7 @@ public class ScreenController implements ScreenDAO {
     public List<Screen> getAllScreens() throws SQLException {
         List<Screen> screens = new ArrayList<>();
         String query = """
-                SELECT S.id, S.timing, S.movie_name, S.seat_available, T.id, T.name, T.address
+                SELECT S.id, S.timing, S.movie_name, S.price, S.seat_available, T.id, T.name, T.address
                 FROM Screen S
                 JOIN Theater T ON S.theater_id = T.id;
                 """;
@@ -132,6 +134,7 @@ public class ScreenController implements ScreenDAO {
 
         builder.setId(rs.getInt("id"))
                 .setMovieName(rs.getString("movie_name"))
+                .setPrice(rs.getDouble("price"))
                 .setSeatAvailable(rs.getInt("seat_available"))
                 .setTiming(rs.getInt("timing"))
                 .setTheater(theater)

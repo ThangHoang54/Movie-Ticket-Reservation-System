@@ -24,7 +24,9 @@ public class Theater {
     public List<Screen> getScreens() {
         return screens;
     }
-
+    public void setScreens(List<Screen> screens) {
+        this.screens = screens;
+    }
     private Theater(Theater.Builder builder) {
         id = builder.id;
         name = builder.name;

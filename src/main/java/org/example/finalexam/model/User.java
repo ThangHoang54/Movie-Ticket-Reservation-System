@@ -28,6 +28,9 @@ public class User {
     public List<Booking> getBookings() {
         return bookings;
     }
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
 
     private User (User.Builder builder) {
         id = builder.id;
