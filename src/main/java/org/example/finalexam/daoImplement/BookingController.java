@@ -95,6 +95,27 @@ public class BookingController implements BookingDAO {
     }
 
     @Override
+    public List<Integer> getBookingAlreadyBookSeatByScreenID(int screenID) throws SQLException {
+        String query = """
+                SELECT B.reserved_seat
+                FROM Booking B
+                WHERE B.screen_id = ?
+                """;
+        List<Integer> bookingSeats = new ArrayList<>();
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)){
+            pst.setInt(1, screenID);
+
+             try(ResultSet rs = pst.executeQuery()) {
+                 while (rs.next()) {
+                     bookingSeats.add(rs.getInt("reserved_seat"));
+                 }
+             }
+        }
+        return bookingSeats;
+    }
+
+    @Override
     public Booking getBookingById(int id) throws SQLException {
         String query = """
                 SELECT B.id, B.reserved_seat, B.booking_date, S.id, S.timing, S.movie_name, S.seat_available, U.id, U.name, U.contact_info, U.booking_history
@@ -113,6 +134,52 @@ public class BookingController implements BookingDAO {
             }
         }
         return null;
+    }
+
+    @Override
+    public int getBookingIDByScreenIDAndRReservedSeat(int screenID, int reservedSeat) throws SQLException {
+        String query = """
+                SELECT B.id
+                FROM Booking B
+                WHERE B.screen_id = ? AND B.reserved_seat = ?;
+                """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, screenID);
+            pst.setInt(2, reservedSeat);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("id");
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public void addUserBooking(int userID, int bookingID) throws SQLException {
+        String insertBooking = """
+                INSERT INTO User_Booking (user_id, booking_id)
+                VALUES (?, ?)
+                """;
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement pstBooking = conn.prepareStatement(insertBooking)) {
+
+                pstBooking.setInt(1, userID);
+                pstBooking.setInt(2, bookingID);
+                pstBooking.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            } finally {
+                conn.setAutoCommit(true);
+            }
+        }
     }
 
     private User buildUser(ResultSet rs) throws SQLException {

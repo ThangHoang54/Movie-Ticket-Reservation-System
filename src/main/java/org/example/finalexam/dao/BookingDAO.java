@@ -14,5 +14,8 @@ public interface BookingDAO {
     void updateBooking(Booking booking) throws SQLException;
     void deleteBooking(int bookingID) throws SQLException;
     List<Booking> getAllBookings() throws SQLException;
+    List<Integer> getBookingAlreadyBookSeatByScreenID(int screenID) throws SQLException;
     Booking getBookingById(int id) throws SQLException;
+    int getBookingIDByScreenIDAndRReservedSeat(int screenID, int reservedSeat) throws SQLException;
+    void addUserBooking(int userID, int bookingID) throws SQLException;
 }

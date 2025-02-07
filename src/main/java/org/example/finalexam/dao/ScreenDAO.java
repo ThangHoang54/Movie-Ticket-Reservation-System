@@ -12,6 +12,7 @@ import java.util.List;
 public interface ScreenDAO {
     void addScreen(Screen screen) throws SQLException;
     Screen getScreenById(int id) throws SQLException;
+    int getScreenTotalSeatByMovieName(String screenName) throws SQLException;
     void updateScreen(Screen screen) throws SQLException;
     void deleteScreen(int id) throws SQLException;
     List<Screen> getAllScreens() throws SQLException;

@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.finalexam.model.Booking;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -56,6 +57,10 @@ public class ViewBookingList_Controller {
     public void setTableView(List<Booking> bookings) {
             ObservableList<Booking> bookingList = FXCollections.observableArrayList();
             bookingList.addAll(bookings);
+            // Creating a Comparator for sorting by id
+            Comparator<Booking> compareByID = Comparator.comparingInt(Booking::getId);
+            // Sorting the ObservableList using the Comparator
+            FXCollections.sort(bookingList, compareByID);
             tableView.setItems(bookingList);
     }
 

@@ -60,7 +60,7 @@
                 </Button>
             <HBox prefHeight="30.0" prefWidth="780.0" style="-fx-background-color: #DDA853;">
                <children>
-                  <Label alignment="CENTER" prefHeight="43.0" prefWidth="780.0" text="COSC2440|COSC2731 Further Programming (S3, 2024)" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="43.0" prefWidth="780.0" text="COSC2440|COSC2731 Further Programming (S3, 2024)" textAlignment="CENTER" textFill="#fbf9f9">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font>

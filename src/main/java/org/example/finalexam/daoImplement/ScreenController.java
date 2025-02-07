@@ -128,6 +128,25 @@ public class ScreenController implements ScreenDAO {
         return -1;
     }
 
+    @Override
+    public int getScreenTotalSeatByMovieName(String screenName) throws SQLException {
+        String query = """
+                SELECT S.seat_available
+                FROM Screen S 
+                WHERE S.movie_name = ?;
+                """;
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setString(1, screenName);
+            try (ResultSet rs = stmt.executeQuery()){
+                while (rs.next()) {
+                   return rs.getInt("seat_available");
+                }
+            }
+        }
+        return -1;
+    }
+
     private Screen buildScreen(ResultSet rs) throws SQLException {
         Screen.Builder builder = new Screen.Builder();
         Theater theater = buildTheater(rs);

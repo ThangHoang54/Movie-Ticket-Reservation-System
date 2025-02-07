@@ -15,7 +15,10 @@ import org.example.finalexam.model.User;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -98,6 +101,32 @@ public class FXMLSupport {
     }
 
     /**
+     * Returns a random available seat number from the total seats, excluding the booked seats.
+     *
+     * @param totalSeats   the total number of seats
+     * @param bookedSeats  the list of seats that are already booked
+     * @return a random available seat number
+     * @throws IllegalArgumentException if there are no available seats
+     */
+    public static int getRandomAvailableSeatNumber(int totalSeats, List<Integer> bookedSeats) {
+        List<Integer> availableSeats = new ArrayList<>();
+        // Populate availableSeats with seats that are not booked
+        for (int i = 1; i <= totalSeats; i++) {
+            if (!bookedSeats.contains(i)) {
+                availableSeats.add(i);
+            }
+        }
+        // If there are no available seats
+        if (availableSeats.isEmpty()) {
+            throw new IllegalArgumentException("No available seats");
+        }
+        // Select a random available seat
+        Random random = new Random();
+        return availableSeats.get(random.nextInt(availableSeats.size()));
+    }
+
+
+    /**
      * Sets an image for the given ImageView from the provided FXML file path.
      *
      * @param iv_image The ImageView to set the image for.
@@ -125,15 +154,6 @@ public class FXMLSupport {
         }
     }
 
-//    public static void handleSwitchTheme(boolean isDarkMode, VBox rootPane) {
-//        isDarkMode = !isDarkMode;
-//        if (!isDarkMode) {
-//            rootPane.getStylesheets().remove("dark_theme_mode.css");
-//            rootPane.getStylesheets().add("light_theme_mode.css");
-//        } else {
-//            rootPane.getStylesheets().remove("light_theme_mode.css");
-//            rootPane.getStylesheets().add("dark_theme_mode.css");
-//        }
-//    }
+
 }
 

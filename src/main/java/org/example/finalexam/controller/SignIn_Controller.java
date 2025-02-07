@@ -53,9 +53,7 @@ public class SignIn_Controller implements Initializable {
         );
 
         bt_login.setOnAction(this::handleLogin);
-//        bt_login.setOnAction(event ->
-//                FXMLSupport.changeScene(event, "/org/example/finalexam/BookMovieTicket.fxml", "Movie Ticket Reservation Page")
-//        );
+
         bt_return.setOnAction(event ->
                 FXMLSupport.changeScene(event, "/org/example/finalexam/PreBookingTicket_Page.fxml", "Booking Account Page")
         );
@@ -99,7 +97,6 @@ public class SignIn_Controller implements Initializable {
         try {
             return userInfoDAO.getUserByFullNameAndEmail(fullname, email);
         } catch (SQLException e) {
-            e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while retrieving user details.");
             return null;
         }

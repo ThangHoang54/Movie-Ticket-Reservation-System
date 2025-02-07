@@ -25,20 +25,27 @@ public class DatabaseConnection {
         }
     }
 //    private static HikariDataSource dataSource;
-
+//
 //    static {
 //        HikariConfig config = new HikariConfig();
-////        config.setJdbcUrl("jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:6543/postgres?user=postgres.oedvqryybzgfoaapesbk&password=x!aUah55x8pqYME&prepareThreshold=0");
-////        config.setUsername("postgres");
-////        config.setPassword("x!aUah55x8pqYME");
-//        config.setJdbcUrl("jdbc:mysql://localhost:3306/movie_ticket_reservation");
-//        config.setUsername("root");
-//        config.setPassword("6Hs@9GM88t");
+//        config.setJdbcUrl("jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:6543/postgres?user=postgres.oedvqryybzgfoaapesbk&password=x!aUah55x8pqYME&prepareThreshold=0");
+//        config.setUsername("postgres");
+//        config.setPassword("x!aUah55x8pqYME");
 //
 //        config.setMaximumPoolSize(15);
 //        config.setMinimumIdle(5);
 //
 //        dataSource = new HikariDataSource(config);
+//    }
+
+//    /**
+//     * Retrieves a connection from the HikariCP connection pool.
+//     *
+//     * @return a {@link Connection} object for interacting with the database
+//     * @throws SQLException if a database access error occurs
+//     */
+//    public static Connection getConnection() throws SQLException {
+//        return dataSource.getConnection();
 //    }
 
     /**
