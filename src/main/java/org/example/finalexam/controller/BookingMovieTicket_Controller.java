@@ -110,6 +110,7 @@ public class BookingMovieTicket_Controller implements Initializable {
         lb_welcome.setText("Welcome " + userSession.getName());
         lb_fullname.setText(userSession.getName());
         lb_contact_info.setText(userSession.getContact_info());
+        FXMLSupport.setImage(iv_image,"/org/example/finalexam/User_Image/user" + userSession.getId() + ".jpg");
     }
 
     private void setupSpinner() {
@@ -398,7 +399,5 @@ public class BookingMovieTicket_Controller implements Initializable {
         refreshTableViewScreenListener();
         loadScreenDataTable();
         setupTextFieldFilter();
-
-        FXMLSupport.setImage(iv_image,"/org/example/finalexam/Image/screen.jpeg");
     }
 }
