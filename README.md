@@ -15,6 +15,15 @@ To get started with the project:
 3. Follow the prompts in the text-based user interface to interact with the system.
 4. Explore the functionalities and provide feedback for improvements.
 
+> Sample accounts for user to login
+
+| Full Name             | Email                        |
+|-----------------------|------------------------------|
+| Le Pham Quang Dai     | 19042005dai@gmail.com        |
+| Dang Hoang My         | danghoangmy1827@gmail.com    |
+| Nguyen Thuc Thuy Tien | Talents@senvangvn.com        |
+| Son Tung MTP          | booking@mtpentertainment.com |
+
 ## Acknowledgments 🙏
 
 Special thanks to the course instructors for providing guidance and resources for this assignment.

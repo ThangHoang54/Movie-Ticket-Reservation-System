@@ -29,6 +29,7 @@ import org.example.finalexam.model.Screen;
 import org.example.finalexam.model.User;
 import org.example.finalexam.service.UserService;
 import org.example.finalexam.utils.FXMLSupport;
+import org.example.finalexam.utils.GenerateInput;
 
 import java.io.IOException;
 import java.net.URL;
@@ -107,10 +108,10 @@ public class BookingMovieTicket_Controller implements Initializable {
     }
 
     private void loadUserInfo() {
-        lb_welcome.setText("Welcome " + userSession.getName());
+        lb_welcome.setText("Welcome\n" + userSession.getName());
         lb_fullname.setText(userSession.getName());
         lb_contact_info.setText(userSession.getContact_info());
-        FXMLSupport.setImage(iv_image,"/org/example/finalexam/User_Image/user" + userSession.getId() + ".jpg");
+        FXMLSupport.setImage(iv_image,"/org/example/finalexam/User_Image/" + GenerateInput.getSimplifyFullName(userSession.getName()) + ".jpg");
     }
 
     private void setupSpinner() {
@@ -135,6 +136,7 @@ public class BookingMovieTicket_Controller implements Initializable {
 
     private void setupTextFieldFilter() {
         tf_search_movie_name.textProperty().addListener((observable, oldValue, newValue) -> filterScreen());
+        tf_search_theater_name.textProperty().addListener((observable, oldValue, newValue) -> filterScreen());
     }
 
     @FXML
@@ -161,7 +163,7 @@ public class BookingMovieTicket_Controller implements Initializable {
                             java.sql.Date booking_date = Date.valueOf(LocalDate.now());
                             totalAvailableSeats = screenDAO.getScreenTotalSeatByMovieName(movie_name);
                             bookedSeats = bookingDAO.getBookingAlreadyBookSeatByScreenID(screenDAO.getScreenIDByScreenName(movie_name));
-                            int reserved_seat = FXMLSupport.getRandomAvailableSeatNumber(totalAvailableSeats, bookedSeats);
+                            int reserved_seat = GenerateInput.getRandomAvailableSeatNumber(totalAvailableSeats, bookedSeats);
 
                             int screenID;
                             int userID;
@@ -379,8 +381,8 @@ public class BookingMovieTicket_Controller implements Initializable {
         String theater_name = tf_search_theater_name.getText().toLowerCase();
 
         List<Screen> filteredScreens = screensList.stream()
-                .filter(property -> property.getTheater().getName().toLowerCase().contains(theater_name))
                 .filter(property -> property.getMovie_name().toLowerCase().contains(movie_name))
+                .filter(property -> property.getTheater().getName().toLowerCase().contains(theater_name))
                 .sorted(Comparator.comparingInt(Screen::getTiming))
                 .collect(Collectors.toList());
 
