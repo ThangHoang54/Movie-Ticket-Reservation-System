@@ -8,15 +8,22 @@ import javafx.scene.control.*;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.example.finalexam.dao.UserDAO;
 import org.example.finalexam.dao.UserInfoDAO;
 import org.example.finalexam.daoImplement.UserController;
 import org.example.finalexam.daoImplement.UserInfoController;
 import org.example.finalexam.model.User;
 import org.example.finalexam.utils.FXMLSupport;
+import org.example.finalexam.utils.GenerateInput;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -41,6 +48,7 @@ public class SignUp_Controller implements Initializable {
 
     private final UserDAO userDAO = new UserController();
     private final UserInfoDAO userInfoDAO = new UserInfoController();
+    private File selectedFile;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,8 +82,8 @@ public class SignUp_Controller implements Initializable {
         String fullName = tf_fullname.getText();
         String email = tf_email.getText();
 
-        if (fullName.isEmpty() || email.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in all fields.");
+        if (fullName.isEmpty() || email.isEmpty() || selectedFile == null) {
+            showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in all fields and upload your profile image");
             return;
         }
 //        if (!validateSignUp(fullName, email)) {
@@ -89,12 +97,49 @@ public class SignUp_Controller implements Initializable {
                     .setBookingHistory("None")
                     .build();
             userDAO.addUser(user);
+            saveImage();
+            selectedFile = null;
             User userSession = getUserDetails(fullName, email);
             loadWithPersistentUser(event, userSession,"/org/example/finalexam/BookMovieTicket.fxml", "Movie Ticket Reservation Page");
 
             showAlert(Alert.AlertType.INFORMATION, "Signup Successful", "You have successfully signed up as the User!");
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while connecting to the database.");
+        }
+    }
+
+    @FXML
+    void uploadFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Upload Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg")
+        );
+        selectedFile = fileChooser.showOpenDialog(new Stage());
+//        if (selectedFile != null) {
+//            System.out.println("Uploaded file: " + selectedFile.getAbsolutePath());
+//        }
+    }
+
+    private void saveImage() {
+        if (selectedFile == null) {
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Image");
+        fileChooser.setInitialFileName(GenerateInput.getSimplifyFullName(tf_fullname.getText()));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg")
+        );
+        File fileToSave = fileChooser.showSaveDialog(new Stage());
+        if (fileToSave != null) {
+            try {
+                Files.copy(selectedFile.toPath(), fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                //System.out.println("File saved to: " + fileToSave.getAbsolutePath());
+            } catch (IOException e) {
+                showAlert(Alert.AlertType.ERROR, "Save Image Error", "An error occurred while saving the image.");
+            }
         }
     }
 
