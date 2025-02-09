@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Hoang Minh Thang - s3999925
+ */
+
 public class GenerateInput {
     /**
      * Returns a random available seat number from the total seats, excluding the booked seats.
