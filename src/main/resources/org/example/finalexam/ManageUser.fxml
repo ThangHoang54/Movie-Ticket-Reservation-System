@@ -90,7 +90,7 @@
                             </font>
                         </Label>
                         <TextField fx:id="tf_id" editable="false" layoutX="152.0" layoutY="20.0" />
-                        <TextField fx:id="tf_fullname" layoutX="151.0" layoutY="63.0" />
+                        <TextField fx:id="tf_fullname" editable="false" layoutX="151.0" layoutY="63.0" />
                         <TextField fx:id="tf_contact_info" layoutX="150.0" layoutY="109.0" />
                         <TextField fx:id="tf_booking" layoutX="151.0" layoutY="166.0" />
                         <Label layoutX="81.0" layoutY="223.0" text="Booking">

@@ -20,6 +20,7 @@ import org.example.finalexam.daoImplement.UserController;
 import org.example.finalexam.model.Booking;
 import org.example.finalexam.model.User;
 import org.example.finalexam.utils.FXMLSupport;
+import org.example.finalexam.utils.GenerateInput;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -79,6 +80,7 @@ public class ManageUser_Controller implements Initializable {
             tf_booking.setText("");
             tf_contact_info.setText("");
             bookingsList.clear();
+            FXMLSupport.setImage(iv_image, "/org/example/finalexam/Image/user.png");
         });
     }
 
@@ -332,6 +334,8 @@ public class ManageUser_Controller implements Initializable {
                 tf_fullname.setText(newSelection.getName());
                 tf_booking.setText(newSelection.getBooking_history());
                 tf_contact_info.setText(newSelection.getContact_info());
+                FXMLSupport.setImage(iv_image,"/org/example/finalexam/User_Image/" + GenerateInput.getSimplifyFullName(tf_fullname.getText()) + ".jpg");
+
 
                 // Get all attribute list of the specific selected user for a suitable pop-up window
                 bookingsList.clear();

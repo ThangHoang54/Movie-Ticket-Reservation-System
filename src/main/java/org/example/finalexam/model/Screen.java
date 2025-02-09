@@ -30,6 +30,9 @@ public class Screen {
     public Theater getTheater() {
         return theater;
     }
+    public void setSeatAvailable(int seat_available) {
+        this.seat_available = seat_available;
+    }
 
     private Screen(Screen.Builder builder) {
         id = builder.id;

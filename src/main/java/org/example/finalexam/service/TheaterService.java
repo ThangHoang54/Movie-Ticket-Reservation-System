@@ -20,9 +20,7 @@ public class TheaterService {
                 SELECT S.id, S.timing, S.movie_name, S.price, S.seat_available, T.id, T.name, T.address
                 FROM Screen S
                 JOIN Theater T ON S.theater_id = T.id
-                JOIN theater_screen TS ON S.id = TS.screen_id
-                JOIN Theater T1 ON T1.id = TS.theater_id
-                WHERE T1.id = ?;
+                WHERE T.id = ?;
                 """;
         try (Connection conn = DatabaseConnection.getConnection()) {
              PreparedStatement stmt = conn.prepareStatement(query);

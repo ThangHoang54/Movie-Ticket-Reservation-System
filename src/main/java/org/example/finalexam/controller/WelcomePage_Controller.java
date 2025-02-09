@@ -3,6 +3,8 @@ package org.example.finalexam.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.finalexam.utils.FXMLSupport;
 
@@ -26,6 +28,10 @@ public class WelcomePage_Controller implements Initializable {
     private Button bt_theater;
     @FXML
     private Button bt_exits;
+    @FXML
+    private ImageView iv_image1;
+    @FXML
+    private ImageView iv_image2;
 
     /**
      * Initializes the landing page controller.
@@ -36,6 +42,8 @@ public class WelcomePage_Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        iv_image1.setImage(new Image("/org/example/finalexam/Image/welcomepage2.jpg"));
+        iv_image2.setImage(new Image("/org/example/finalexam/Image/welcomepage1.jpg"));
         bt_user.setOnAction(event ->
             FXMLSupport.changeScene(event, "/org/example/finalexam/ManageUser.fxml", "Manage User")
         );

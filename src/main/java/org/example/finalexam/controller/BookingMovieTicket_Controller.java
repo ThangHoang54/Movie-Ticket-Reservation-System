@@ -140,8 +140,8 @@ public class BookingMovieTicket_Controller implements Initializable {
     }
 
     @FXML
-    void bookingTicket(ActionEvent event) {
-        if (Integer.parseInt(lb_total_price.getText()) > 0) {
+    void bookingTicket() {
+        if (Double.parseDouble(lb_total_price.getText().substring(1)) > 0.0) {
             progressBar.setVisible(true); // Show the progress bar
             progressBar.progressProperty().unbind(); // Unbind the progress property
             progressBar.setProgress(0); // Reset progress
@@ -199,8 +199,6 @@ public class BookingMovieTicket_Controller implements Initializable {
 
                             Thread.sleep(500);
                             bookingDAO.addBooking(booking);
-                            Thread.sleep(500);
-                            bookingDAO.addUserBooking(userID, bookingDAO.getBookingIDByScreenIDAndRReservedSeat(screenID, reserved_seat));
                         }
                     } catch (SQLException e) {
                         showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while connecting to the database.");
@@ -227,6 +225,7 @@ public class BookingMovieTicket_Controller implements Initializable {
                     progressBar.setVisible(false); // Hide the progress bar
                     progressBar.progressProperty().unbind(); // Unbind the progress property
                     progressBar.setProgress(0); // Reset progress
+
                     showAlert(Alert.AlertType.ERROR, "Add new Booking fail", "Please choose 1 screen from the table to perform booking ticket.");
                 }
             };
@@ -235,7 +234,7 @@ public class BookingMovieTicket_Controller implements Initializable {
             // Run the task in a new thread
             new Thread(task).start();
         } else {
-            showAlert(Alert.AlertType.ERROR, "Booking a Ticket Fail", "The id text field must be empty.");
+            showAlert(Alert.AlertType.ERROR, "Booking a Ticket Fail", "Please choose 1 screen from the table to perform booking ticket.");
         }
 
     }
@@ -303,6 +302,10 @@ public class BookingMovieTicket_Controller implements Initializable {
                 List<Screen> screens = screenDAO.getAllScreens();
                 screensList.addAll(screens);
 
+                for (Screen screen : screens) {
+                    screen.setSeatAvailable(screen.getSeat_available() - bookingDAO.getBookingAlreadyBookSeatByScreenID(screen.getId()).size());
+                }
+
                 // Creating a Comparator for sorting by id
                 Comparator<Screen> compareById = Comparator.comparingInt(Screen::getId);
                 // Sorting the ObservableList using the Comparator
@@ -335,6 +338,10 @@ public class BookingMovieTicket_Controller implements Initializable {
         try {
             List<Screen> screens = screenDAO.getAllScreens();
             screensList.addAll(screens);
+
+            for (Screen screen : screensList) {
+                screen.setSeatAvailable(screen.getSeat_available() - bookingDAO.getBookingAlreadyBookSeatByScreenID(screen.getId()).size());
+            }
             // Creating a Comparator for sorting by id
             Comparator<Screen> compareByID = Comparator.comparingInt(Screen::getId);
             // Sorting the ObservableList using the Comparator

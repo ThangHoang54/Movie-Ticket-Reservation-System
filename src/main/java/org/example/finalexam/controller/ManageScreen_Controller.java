@@ -11,8 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import org.example.finalexam.dao.BookingDAO;
 import org.example.finalexam.dao.ScreenDAO;
 import org.example.finalexam.dao.TheaterDAO;
+import org.example.finalexam.daoImplement.BookingController;
 import org.example.finalexam.daoImplement.ScreenController;
 import org.example.finalexam.daoImplement.TheaterController;
 import org.example.finalexam.model.Screen;
@@ -34,6 +36,7 @@ public class ManageScreen_Controller implements Initializable {
 
     private final ScreenDAO screenDAO = new ScreenController();
     private final TheaterDAO theaterDAO = new TheaterController();
+    private final BookingDAO bookingDAO = new BookingController();
     private final ObservableList<Screen> screensList = FXCollections.observableArrayList();
 
     @FXML
@@ -346,6 +349,10 @@ public class ManageScreen_Controller implements Initializable {
                 List<Screen> screens = screenDAO.getAllScreens();
                 screensList.addAll(screens);
 
+                for (Screen screen : screensList) {
+                    screen.setSeatAvailable(screen.getSeat_available() - bookingDAO.getBookingAlreadyBookSeatByScreenID(screen.getId()).size());
+                }
+
                 // Creating a Comparator for sorting by id
                 Comparator<Screen> compareById = Comparator.comparingInt(Screen::getId);
                 // Sorting the ObservableList using the Comparator
@@ -378,6 +385,10 @@ public class ManageScreen_Controller implements Initializable {
         try {
             List<Screen> screens = screenDAO.getAllScreens();
             screensList.addAll(screens);
+
+            for (Screen screen : screensList) {
+                screen.setSeatAvailable(screen.getSeat_available() - bookingDAO.getBookingAlreadyBookSeatByScreenID(screen.getId()).size());
+            }
             // Creating a Comparator for sorting by id
             Comparator<Screen> compareByID = Comparator.comparingInt(Screen::getId);
             // Sorting the ObservableList using the Comparator
