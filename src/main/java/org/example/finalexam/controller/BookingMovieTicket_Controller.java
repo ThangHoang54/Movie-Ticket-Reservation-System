@@ -300,11 +300,13 @@ public class BookingMovieTicket_Controller implements Initializable {
 
                 // Fetch data from the database
                 List<Screen> screens = screenDAO.getAllScreens();
-                screensList.addAll(screens);
-
                 for (Screen screen : screens) {
                     screen.setSeatAvailable(screen.getSeat_available() - bookingDAO.getBookingAlreadyBookSeatByScreenID(screen.getId()).size());
+                    if (screen.getSeat_available() <= 0) {
+                        screens.remove(screen);
+                    }
                 }
+                screensList.addAll(screens);
 
                 // Creating a Comparator for sorting by id
                 Comparator<Screen> compareById = Comparator.comparingInt(Screen::getId);
@@ -337,11 +339,14 @@ public class BookingMovieTicket_Controller implements Initializable {
         screensList.clear();
         try {
             List<Screen> screens = screenDAO.getAllScreens();
+            for (Screen screen : screens) {
+                screen.setSeatAvailable(screen.getSeat_available() - bookingDAO.getBookingAlreadyBookSeatByScreenID(screen.getId()).size());
+                if (screen.getSeat_available() <= 0) {
+                    screens.remove(screen);
+                }
+            }
             screensList.addAll(screens);
 
-            for (Screen screen : screensList) {
-                screen.setSeatAvailable(screen.getSeat_available() - bookingDAO.getBookingAlreadyBookSeatByScreenID(screen.getId()).size());
-            }
             // Creating a Comparator for sorting by id
             Comparator<Screen> compareByID = Comparator.comparingInt(Screen::getId);
             // Sorting the ObservableList using the Comparator
