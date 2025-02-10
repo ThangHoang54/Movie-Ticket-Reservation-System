@@ -1,4 +1,4 @@
-package org.example.finalexam.controller;
+package org.example.finalexam.controller.admin;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,16 +35,16 @@ public class AdminHomePage_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iv_image1.setImage(new Image("/org/example/finalexam/Image/admin.jpg"));
         bt_user.setOnAction(event ->
-                FXMLSupport.changeScene(event, "/org/example/finalexam/ManageUser.fxml", "Manage User")
+                FXMLSupport.changeScene(event, "/org/example/finalexam/AdminUI/ManageUser.fxml", "Manage User")
         );
         bt_booking.setOnAction(event ->
-                FXMLSupport.changeScene(event, "/org/example/finalexam/ManageBooking.fxml", "Manage Booking")
+                FXMLSupport.changeScene(event, "/org/example/finalexam/AdminUI/ManageBooking.fxml", "Manage Booking")
         );
         bt_screen.setOnAction(event ->
-                FXMLSupport.changeScene(event, "/org/example/finalexam/ManageScreen.fxml", "Manage Screen")
+                FXMLSupport.changeScene(event, "/org/example/finalexam/AdminUI/ManageScreen.fxml", "Manage Screen")
         );
         bt_theater.setOnAction(event ->
-                FXMLSupport.changeScene(event, "/org/example/finalexam/ManageTheater.fxml", "Manage Theater")
+                FXMLSupport.changeScene(event, "/org/example/finalexam/AdminUI/ManageTheater.fxml", "Manage Theater")
         );
         bt_logout.setOnAction(event -> {
             FXMLSupport.changeScene(event, "/org/example/finalexam/Welcome_Page.fxml", "Welcome Page");

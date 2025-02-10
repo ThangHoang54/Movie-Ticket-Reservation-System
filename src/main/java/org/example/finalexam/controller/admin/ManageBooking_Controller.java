@@ -1,4 +1,4 @@
-package org.example.finalexam.controller;
+package org.example.finalexam.controller.admin;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -80,7 +80,7 @@ public class ManageBooking_Controller implements Initializable {
 
     private void setUPButton() {
         bt_return.setOnAction(e -> {
-            FXMLSupport.changeScene(e, "/org/example/finalexam/AdminHomePage.fxml", "Admin Homepage");
+            FXMLSupport.changeScene(e, "/org/example/finalexam/AdminUI/AdminHomePage.fxml", "Admin Homepage");
         });
         bt_reset_field.setOnAction(e -> {
             tf_id.setText("");

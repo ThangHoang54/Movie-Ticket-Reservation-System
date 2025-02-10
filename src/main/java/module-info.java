@@ -12,4 +12,8 @@ module org.example.finalexam {
     opens org.example.finalexam.model to java.base;
     opens org.example.finalexam.Image;
     exports org.example.finalexam.controller;
+    exports org.example.finalexam.controller.admin;
+    opens org.example.finalexam.controller.admin to javafx.fxml;
+    exports org.example.finalexam.controller.user;
+    opens org.example.finalexam.controller.user to javafx.fxml;
 }

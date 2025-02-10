@@ -1,21 +1,21 @@
-package org.example.finalexam.controller;
+package org.example.finalexam.controller.admin;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import org.example.finalexam.controller.pop_up.ViewScreenList_Controller;
+import org.example.finalexam.dao.BookingDAO;
+import org.example.finalexam.dao.ScreenDAO;
 import org.example.finalexam.dao.TheaterDAO;
+import org.example.finalexam.daoImplement.BookingController;
+import org.example.finalexam.daoImplement.ScreenController;
 import org.example.finalexam.daoImplement.TheaterController;
 import org.example.finalexam.model.Screen;
 import org.example.finalexam.model.Theater;
@@ -23,10 +23,7 @@ import org.example.finalexam.utils.FXMLSupport;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.example.finalexam.utils.FXMLSupport.showAlert;
@@ -35,64 +32,74 @@ import static org.example.finalexam.utils.FXMLSupport.showAlert;
  * @author Hoang Minh Thang - s3999925
  */
 
-public class ManageTheater_Controller implements Initializable {
+public class ManageScreen_Controller implements Initializable {
 
-    private List<Screen> scenesList = new ArrayList<>();
+    private final ScreenDAO screenDAO = new ScreenController();
     private final TheaterDAO theaterDAO = new TheaterController();
-    private final ObservableList<Theater> theaterList = FXCollections.observableArrayList();
+    private final BookingDAO bookingDAO = new BookingController();
+    private final ObservableList<Screen> screensList = FXCollections.observableArrayList();
 
     @FXML
     private Button bt_return;
     @FXML
     private Button bt_reset_field;
     @FXML
-    private TableColumn<Theater, String> column_address;
+    private TableColumn<Screen, Integer> column_id;
     @FXML
-    private TableColumn<Theater, Integer> column_id;
+    private TableColumn<Screen, String> column_movie_name;
     @FXML
-    private TableColumn<Theater, String> column_name;
+    private TableColumn<Screen, Integer> column_seat_available;
+    @FXML
+    private TableColumn<Screen, String> column_theater_name;
+    @FXML
+    private TableColumn<Screen, Integer> column_timing;
     @FXML
     private ProgressBar progressBar;
     @FXML
-    private TableView<Theater> tableView;
-    @FXML
-    private TextField tf_address;
+    private TableView<Screen> tableView;
     @FXML
     private TextField tf_id;
     @FXML
-    private TextField tf_name;
+    private TextField tf_movie_name;
     @FXML
-    private TextField tf_search_name;
+    private TextField tf_seat_available;
     @FXML
-    private TextField tf_search_address;
+    private TextField tf_theater_name;
+    @FXML
+    private TextField tf_timing;
+    @FXML
+    private TextField tf_price;
+    @FXML
+    private TextField tf_search_movie_name;
     @FXML
     private ImageView iv_image;
 
     private void setUPButton() {
         bt_return.setOnAction(e -> {
-            FXMLSupport.changeScene(e, "/org/example/finalexam/AdminHomePage.fxml", "Admin Homepage");
+            FXMLSupport.changeScene(e, "/org/example/finalexam/AdminUI/AdminHomePage.fxml", "Admin Homepage");
         });
-        bt_reset_field.setOnAction(e -> {
+        bt_reset_field.setOnAction(_ -> {
             tf_id.setText("");
-            tf_name.setText("");
-            tf_address.setText("");
-            scenesList.clear();
+            tf_movie_name.setText("");
+            tf_seat_available.setText("");
+            tf_theater_name.setText("");
+            tf_timing.setText("");
+            tf_price.setText("");
         });
     }
 
     private void setupTextFieldFilter() {
-        tf_search_name.textProperty().addListener((observable, oldValue, newValue) -> filterTheater());
-        tf_search_address.textProperty().addListener((observable, oldValue, newValue) -> filterTheater());
+        tf_search_movie_name.textProperty().addListener((observable, oldValue, newValue) -> filterScreen());
     }
 
     @FXML
-    void addTheater(ActionEvent event) {
+    void addScreen(ActionEvent event) {
         if (tf_id.getText().isEmpty()) {
             progressBar.setVisible(true); // Show the progress bar
             progressBar.progressProperty().unbind(); // Unbind the progress property
             progressBar.setProgress(0); // Reset progress
 
-            if (tf_name.getText().isEmpty() || tf_address.getText().isEmpty()) {
+            if (tf_timing.getText().isEmpty() || tf_movie_name.getText().isEmpty() || tf_seat_available.getText().isEmpty() || tf_theater_name.getText().isEmpty() || tf_price.getText().isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in all text fields except an id text field.");
                 progressBar.setVisible(false);
                 return;
@@ -106,16 +113,35 @@ public class ManageTheater_Controller implements Initializable {
                 @Override
                 protected Void call() throws Exception {
                     try {
-                        String name = tf_name.getText();
-                        String address = tf_address.getText();
+                        int timing = Integer.parseInt(tf_timing.getText());
+                        String movie_name = tf_movie_name.getText();
+                        int seat_available = Integer.parseInt(tf_seat_available.getText());
+                        String theater_name = tf_theater_name.getText();
+                        double price = Double.parseDouble(tf_price.getText());
+
+                        int theaterID;
+                        try {
+                            theaterID = theaterDAO.getTheaterIDByName(theater_name);
+                        } catch (SQLException e) {
+                            showAlert(Alert.AlertType.ERROR, "Error", "Theater ID not found: " + e.getMessage());
+                            return null;
+                        }
 
                         Theater theater = new Theater.Builder()
-                                .setName(name)
-                                .setAddress(address)
+                                .setID(theaterID)
+                                .setName(theater_name)
+                                .build();
+
+                        Screen screen = new Screen.Builder()
+                                .setTiming(timing)
+                                .setMovieName(movie_name)
+                                .setPrice(price)
+                                .setSeatAvailable(seat_available)
+                                .setTheater(theater)
                                 .build();
 
                         Thread.sleep(500);
-                        theaterDAO.addTheater(theater);
+                        screenDAO.addScreen(screen);
 
                     } catch (SQLException e) {
                         showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while connecting to the database.");
@@ -130,7 +156,7 @@ public class ManageTheater_Controller implements Initializable {
                     progressBar.progressProperty().unbind(); // Unbind the progress property
                     progressBar.setProgress(0); // Reset progress
                     refreshTableView();
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "Theater added successfully.");
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Screen added successfully.");
                 }
 
                 @Override
@@ -139,7 +165,7 @@ public class ManageTheater_Controller implements Initializable {
                     progressBar.setVisible(false); // Hide the progress bar
                     progressBar.progressProperty().unbind(); // Unbind the progress property
                     progressBar.setProgress(0); // Reset progress
-                    showAlert(Alert.AlertType.ERROR, "Add new Theater fail", "An error occurred while adding the theater.");
+                    showAlert(Alert.AlertType.ERROR, "Add new Screen fail", "An error occurred while adding the screen.");
                 }
             };
             // Bind the progress bar to the task's progress
@@ -147,15 +173,15 @@ public class ManageTheater_Controller implements Initializable {
             // Run the task in a new thread
             new Thread(task).start();
         } else {
-            showAlert(Alert.AlertType.ERROR, "Add new Theater fail", "The id text field must be empty.");
+            showAlert(Alert.AlertType.ERROR, "Add new Screen fail", "The id text field must be empty.");
         }
     }
 
     @FXML
-    void deleteTheater(ActionEvent event) {
+    void deleteScreen(ActionEvent event) {
         try {
-            Theater theater = tableView.getSelectionModel().getSelectedItem();
-            if (theater != null && !tf_id.getText().isEmpty()) {
+            Screen screen = tableView.getSelectionModel().getSelectedItem();
+            if (screen != null && !tf_id.getText().isEmpty()) {
                 progressBar.setVisible(true); // Show the progress bar
                 progressBar.progressProperty().unbind(); // Unbind the progress property
                 progressBar.setProgress(0); // Reset progress
@@ -165,7 +191,7 @@ public class ManageTheater_Controller implements Initializable {
                     protected Void call() throws Exception {
                         try {
                             Thread.sleep(500);
-                            theaterDAO.deleteTheater(theater.getId());
+                            screenDAO.deleteScreen(screen.getId());
                         } catch (SQLException e) {
                             showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while connecting to the database.");
                         }
@@ -177,14 +203,14 @@ public class ManageTheater_Controller implements Initializable {
                         super.succeeded();
                         progressBar.setVisible(false); // Hide the progress bar
                         refreshTableView(); // Refresh the table view after deletion
-                        showAlert(Alert.AlertType.INFORMATION, "Success", "Theater deleted successfully.");
+                        showAlert(Alert.AlertType.INFORMATION, "Success", "Screen deleted successfully.");
                     }
 
                     @Override
                     protected void failed() {
                         super.failed();
                         progressBar.setVisible(false); // Hide the progress bar
-                        showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while deleting the theater.");
+                        showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while deleting the screen.");
                     }
                 };
                 // Bind the progress bar to the task's progress
@@ -192,7 +218,7 @@ public class ManageTheater_Controller implements Initializable {
                 // Run the task in a new thread
                 new Thread(task).start();
             } else {
-                showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select a theater to delete.");
+                showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select the screen to delete.");
             }
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error", "An unexpected error occurred.");
@@ -200,14 +226,14 @@ public class ManageTheater_Controller implements Initializable {
     }
 
     @FXML
-    void updateTheater(ActionEvent event) {
+    void updateScreen(ActionEvent event) {
         if (!tf_id.getText().isEmpty()) {
             // Show progress bar
             progressBar.setVisible(true);
             progressBar.progressProperty().unbind(); // Unbind the progress property
             progressBar.setProgress(0); // Reset progress
 
-            if (tf_name.getText().isEmpty() || tf_address.getText().isEmpty()) {
+            if (tf_timing.getText().isEmpty() || tf_movie_name.getText().isEmpty() || tf_seat_available.getText().isEmpty() || tf_theater_name.getText().isEmpty() || tf_price.getText().isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in all text fields except an id text field.");
                 progressBar.setVisible(false);
                 return;
@@ -221,22 +247,42 @@ public class ManageTheater_Controller implements Initializable {
                 @Override
                 protected Void call() throws Exception {
                     int id = Integer.parseInt(tf_id.getText());
-                    String name = tf_name.getText();
-                    String address = tf_address.getText();
+                    int timing = Integer.parseInt(tf_timing.getText());
+                    String movie_name = tf_movie_name.getText();
+                    int seat_available = Integer.parseInt(tf_seat_available.getText());
+                    String theater_name = tf_theater_name.getText();
+                    double price = Double.parseDouble(tf_price.getText());
 
-                    Theater currentTheater = theaterDAO.getTheaterById(id);
-                    if (currentTheater == null) {
-                        showAlert(Alert.AlertType.ERROR, "Update Error", "Theater not found with ID: " + id);
+                    Screen currentScreen = screenDAO.getScreenById(id);
+                    if (currentScreen == null) {
+                        showAlert(Alert.AlertType.ERROR, "Update Error", "Screen not found with ID: " + id);
                         return null;
                     }
+
+                    int theaterID;
+                    try {
+                        theaterID = theaterDAO.getTheaterIDByName(theater_name);
+                    } catch (SQLException e) {
+                        showAlert(Alert.AlertType.ERROR, "Error", "Theater ID not found: " + e.getMessage());
+                        return null;
+                    }
+
                     Theater theater = new Theater.Builder()
-                            .setID(id)
-                            .setName(name)
-                            .setAddress(address)
+                            .setID(theaterID)
+                            .setName(theater_name)
+                            .build();
+
+                    Screen screen = new Screen.Builder()
+                            .setId(id)
+                            .setTiming(timing)
+                            .setMovieName(movie_name)
+                            .setPrice(price)
+                            .setSeatAvailable(seat_available)
+                            .setTheater(theater)
                             .build();
 
                     Thread.sleep(500);
-                    theaterDAO.updateTheater(theater);
+                    screenDAO.updateScreen(screen);
                     return null;
                 }
 
@@ -245,14 +291,14 @@ public class ManageTheater_Controller implements Initializable {
                     super.succeeded();
                     progressBar.setVisible(false); // Hide the progress bar
                     refreshTableView(); // Refresh the table view after update
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "Theater updated successfully.");
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Screen updated successfully.");
                 }
 
                 @Override
                 protected void failed() {
                     super.failed();
                     progressBar.setVisible(false); // Hide the progress bar
-                    showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while updating the theater.");
+                    showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while updating the screen.");
                 }
             };
             // Bind the progress bar to the task's progress
@@ -260,42 +306,19 @@ public class ManageTheater_Controller implements Initializable {
             // Run the task in a new thread
             new Thread(task).start();
         } else {
-            showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select a theater to update.");
+            showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select the screen to update.");
         }
     }
 
-    @FXML
-    public void handlingViewScreen(ActionEvent event) {
-        try {
-            if (!tf_id.getText().isEmpty()) {
-                if (!scenesList.isEmpty()) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/finalexam/Pop_Up_Window/Screen.fxml"));
-                    Parent root = loader.load();
-                    ViewScreenList_Controller controller = loader.getController();
-                    controller.setupTableColumns();
-
-                    controller.setScreens(scenesList);
-
-                    Stage stage = new Stage();
-                    stage.setTitle("Screen List");
-                    stage.setScene(new Scene(root));
-                    stage.setResizable(false);
-                    stage.show();
-                } else {
-                    showAlert(Alert.AlertType.INFORMATION, " List Announce", "There is no screen for this theater.");
-                }
-            } else {
-                showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select a theater to view it screen(s).");
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void setupTableColumns() {
+    public void setupTableColumns() {
         column_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        column_name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        column_address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        column_timing.setCellValueFactory(new PropertyValueFactory<>("timing"));
+        column_movie_name.setCellValueFactory(new PropertyValueFactory<>("movie_name"));
+        column_theater_name.setCellValueFactory(cellDataFeatures -> {
+            Screen screen = cellDataFeatures.getValue();
+            return new SimpleStringProperty(screen.getTheater().getName());
+        });
+        column_seat_available.setCellValueFactory(new PropertyValueFactory<>("seat_available"));
     }
 
     private void setupTableViewListeners() {
@@ -303,18 +326,11 @@ public class ManageTheater_Controller implements Initializable {
             if (newSelection != null) {
                 // Set text on the text field
                 tf_id.setText(String.valueOf(newSelection.getId()));
-                tf_name.setText(newSelection.getName());
-                tf_address.setText(newSelection.getAddress());
-
-                // Get all attribute list of the specific selected user for a suitable pop-up window
-                scenesList.clear();
-
-                // Check if the screens list is not null before adding
-                if (newSelection.getScreens() != null) {
-                    scenesList.addAll(newSelection.getScreens());
-                } else {
-                    System.out.println("The screen list of the select theater is null");
-                }
+                tf_timing.setText(String.valueOf(newSelection.getTiming()));
+                tf_movie_name.setText(newSelection.getMovie_name());
+                tf_seat_available.setText(String.valueOf(newSelection.getSeat_available()));
+                tf_theater_name.setText(newSelection.getTheater().getName());
+                tf_price.setText(String.valueOf(newSelection.getPrice()));
             }
         });
     }
@@ -323,20 +339,31 @@ public class ManageTheater_Controller implements Initializable {
         progressBar.setVisible(true);
         progressBar.setProgress(0);
 
-        Task<ObservableList<Theater>> task = new Task<>() {
+        Task<ObservableList<Screen>> task = new Task<>() {
             @Override
-            protected ObservableList<Theater> call() throws Exception {
+            protected ObservableList<Screen> call() throws Exception {
                 // Simulate a delay for loading data
                 Thread.sleep(500); // Simulate delay for demonstration purposes
 
                 // Fetch data from the database
-                List<Theater> theaters = theaterDAO.getAllTheaters();
-                theaterList.addAll(theaters);
+                List<Screen> screens = screenDAO.getAllScreens();
+                for (Screen screen : screens) {
+                    screen.setSeatAvailable(screen.getSeat_available() - bookingDAO.getBookingAlreadyBookSeatByScreenID(screen.getId()).size());
+                    if (screen.getSeat_available() <= 0) {
+                        screens.remove(screen);
+                    }
+                }
+                screensList.addAll(screens);
+
+                for (Screen screen : screensList) {
+                    screen.setSeatAvailable(screen.getSeat_available() - bookingDAO.getBookingAlreadyBookSeatByScreenID(screen.getId()).size());
+                }
+
                 // Creating a Comparator for sorting by id
-                Comparator<Theater> compareByID = Comparator.comparingInt(Theater::getId);
+                Comparator<Screen> compareById = Comparator.comparingInt(Screen::getId);
                 // Sorting the ObservableList using the Comparator
-                FXCollections.sort(theaterList, compareByID);
-                return theaterList;
+                FXCollections.sort(screensList, compareById);
+                return screensList;
             }
             @Override
             protected void succeeded() {
@@ -360,17 +387,24 @@ public class ManageTheater_Controller implements Initializable {
     }
 
     private void refreshTableView() {
-        theaterList.clear();
+        screensList.clear();
         try {
-            List<Theater> theaters = theaterDAO.getAllTheaters();
-            theaterList.addAll(theaters);
+            List<Screen> screens = screenDAO.getAllScreens();
+            for (Screen screen : screens) {
+                screen.setSeatAvailable(screen.getSeat_available() - bookingDAO.getBookingAlreadyBookSeatByScreenID(screen.getId()).size());
+                if (screen.getSeat_available() <= 0) {
+                    screens.remove(screen);
+                }
+            }
+            screensList.addAll(screens);
+
             // Creating a Comparator for sorting by id
-            Comparator<Theater> compareByID = Comparator.comparingInt(Theater::getId);
+            Comparator<Screen> compareByID = Comparator.comparingInt(Screen::getId);
             // Sorting the ObservableList using the Comparator
-            FXCollections.sort(theaterList, compareByID);
+            FXCollections.sort(screensList, compareByID);
 
             Platform.runLater(() -> {
-                tableView.setItems(theaterList);
+                tableView.setItems(screensList);
                 tableView.refresh();
             });
         } catch (SQLException e) {
@@ -382,20 +416,18 @@ public class ManageTheater_Controller implements Initializable {
      * Adds a listener to automatically refresh the TableView when changes occur.
      */
     private void refreshTableViewListener() {
-        tableView.getItems().addListener((javafx.collections.ListChangeListener<Theater>) _ -> tableView.refresh());
+        tableView.getItems().addListener((javafx.collections.ListChangeListener<Screen>) _ -> tableView.refresh());
     }
 
-    private void filterTheater() {
-        String name = tf_search_name.getText().toLowerCase();
-        String address = tf_search_address.getText().toLowerCase();
+    private void  filterScreen() {
+        String movie_name = tf_search_movie_name.getText().toLowerCase();
 
-        List<Theater> filteredTheaters = theaterList.stream()
-                .filter(property -> property.getName().toLowerCase().contains(name))
-                .sorted(Comparator.comparing(Theater::getName))
-                .filter(property -> property.getAddress().toLowerCase().contains(address))
+        List<Screen> filteredScreens = screensList.stream()
+                .filter(property -> property.getMovie_name().toLowerCase().contains(movie_name))
+                .sorted(Comparator.comparingInt(Screen::getTiming))
                 .collect(Collectors.toList());
 
-        tableView.setItems(FXCollections.observableList(filteredTheaters));
+        tableView.setItems(FXCollections.observableList(filteredScreens));
     }
 
     @Override
@@ -407,6 +439,6 @@ public class ManageTheater_Controller implements Initializable {
         loadData();
         setupTextFieldFilter();
 
-       FXMLSupport.setImage(iv_image,"/org/example/finalexam/Image/theater.jpeg");
+       FXMLSupport.setImage(iv_image,"/org/example/finalexam/Image/screen.jpeg");
     }
 }

@@ -100,7 +100,7 @@ public class SignUp_Controller implements Initializable {
             saveImage();
             selectedFile = null;
             User userSession = getUserDetails(fullName, email);
-            loadWithPersistentUser(event, userSession,"/org/example/finalexam/BookMovieTicket.fxml", "Movie Ticket Reservation Page");
+            loadWithPersistentUser(event, userSession, "/org/example/finalexam/UserUI/BookMovieTicket.fxml", "Movie Ticket Reservation Page");
 
             showAlert(Alert.AlertType.INFORMATION, "Signup Successful", "You have successfully signed up as the User!");
         } catch (SQLException e) {

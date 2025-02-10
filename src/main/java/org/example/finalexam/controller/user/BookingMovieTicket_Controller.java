@@ -1,4 +1,4 @@
-package org.example.finalexam.controller;
+package org.example.finalexam.controller.user;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;

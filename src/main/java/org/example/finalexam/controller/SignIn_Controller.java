@@ -81,13 +81,13 @@ public class SignIn_Controller implements Initializable {
         }
 
         if (fullnameText.equals("movieAdmin") && emailText.equals("admin123!")) {
-            changeScene(event, "/org/example/finalexam/AdminHomePage.fxml", "Admin Homepage");
+            changeScene(event, "/org/example/finalexam/AdminUI/AdminHomePage.fxml", "Admin Homepage");
             return;
         }
         if (authenticate(fullnameText, emailText)) {
             User userSession = getUserDetails(fullnameText, emailText);
             if (userSession != null) {
-                loadWithPersistentUser(event, userSession, "/org/example/finalexam/BookMovieTicket.fxml", "Movie Ticket Reservation Page");
+                loadWithPersistentUser(event, userSession, "/org/example/finalexam/UserUI/BookMovieTicket.fxml", "Movie Ticket Reservation Page");
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Error", "User details could not be retrieved.");
             }
