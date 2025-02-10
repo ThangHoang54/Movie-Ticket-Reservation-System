@@ -151,6 +151,7 @@ public class BookingMovieTicket_Controller implements Initializable {
                 progressBar.setVisible(false);
                 return;
             }
+            List<Integer> seats = new ArrayList<>();
 
             Task<Void> task = new Task<>() {
                 @Override
@@ -164,7 +165,7 @@ public class BookingMovieTicket_Controller implements Initializable {
                             totalAvailableSeats = screenDAO.getScreenTotalSeatByMovieName(movie_name);
                             bookedSeats = bookingDAO.getBookingAlreadyBookSeatByScreenID(screenDAO.getScreenIDByScreenName(movie_name));
                             int reserved_seat = GenerateInput.getRandomAvailableSeatNumber(totalAvailableSeats, bookedSeats);
-
+                            seats.add(reserved_seat);
                             int screenID;
                             int userID;
                             try {
@@ -216,7 +217,18 @@ public class BookingMovieTicket_Controller implements Initializable {
                     refreshTableViewBooking();
                     bookedSeats.clear();
                     totalAvailableSeats = 0;
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "You had books the ticket" + ((sn_quantity.getValue() > 1) ?"s ":" ") + "successfully.");
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "" +
+                            "You had books" + ((sn_quantity.getValue() > 1) ?"tickets ":"ticket") + " successfully.\n\n " +
+                            "Thank you for your booking!\n\n" +
+                            "Your booking details:\n" +
+                            "Customer id: " + userSession.getId() + "Customer name: " + userSession.getName() + "\n" +
+                            "Your Theater Name: " + tf_theater_name.getText() + "\n" +
+                            "Your Theater Address: " + tf_theater_address.getText() + "\n" +
+                            "Your Movie Name: " + tf_movie_name.getText() + "\n" +
+                            "You had book on: " + Date.valueOf(LocalDate.now()) + "\n" +
+                            "Your Reserved Seat(s): " + seats + "\n\n" +
+                            "Please arrive 15 minutes before the showtime and present this confirmation at the ticket counter. Enjoy the movie!"
+                    );
                 }
 
                 @Override

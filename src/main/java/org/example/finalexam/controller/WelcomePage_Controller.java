@@ -17,21 +17,16 @@ import java.util.ResourceBundle;
 
 public class WelcomePage_Controller implements Initializable {
 
-    public Button bt_book_movie_ticket;
-    @FXML
-    private Button bt_user;
-    @FXML
-    private Button bt_screen;
-    @FXML
-    private Button bt_booking;
-    @FXML
-    private Button bt_theater;
     @FXML
     private Button bt_exits;
     @FXML
     private ImageView iv_image1;
     @FXML
     private ImageView iv_image2;
+    @FXML
+    private Button bt_login;
+    @FXML
+    private Button bt_signup;
 
     /**
      * Initializes the landing page controller.
@@ -44,21 +39,12 @@ public class WelcomePage_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iv_image1.setImage(new Image("/org/example/finalexam/Image/welcomepage2.jpg"));
         iv_image2.setImage(new Image("/org/example/finalexam/Image/welcomepage1.jpg"));
-        bt_user.setOnAction(event ->
-            FXMLSupport.changeScene(event, "/org/example/finalexam/ManageUser.fxml", "Manage User")
-        );
-        bt_booking.setOnAction(event ->
-            FXMLSupport.changeScene(event, "/org/example/finalexam/ManageBooking.fxml", "Manage Booking")
-        );
-        bt_screen.setOnAction(event ->
-            FXMLSupport.changeScene(event, "/org/example/finalexam/ManageScreen.fxml", "Manage Screen")
-        );
-        bt_theater.setOnAction(event ->
-                FXMLSupport.changeScene(event, "/org/example/finalexam/ManageTheater.fxml", "Manage Theater")
-        );
-        bt_book_movie_ticket.setOnAction(event ->
-                FXMLSupport.changeScene(event, "/org/example/finalexam/PreBookingTicket_Page.fxml", "Ticket Reservation Account")
-        );
+        bt_login.setOnAction(event -> {
+            FXMLSupport.changeScene(event, "/org/example/finalexam/LoginPage.fxml", "Login Page");
+        });
+        bt_signup.setOnAction(event -> {
+            FXMLSupport.changeScene(event, "/org/example/finalexam/SignupPage.fxml", "Signup Page");
+        });
         // Close the app when user click on "Exit Application button"
         bt_exits.setOnAction(event ->{
             // Get the stage and close the application

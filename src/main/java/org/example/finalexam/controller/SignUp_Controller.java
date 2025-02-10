@@ -57,7 +57,7 @@ public class SignUp_Controller implements Initializable {
                 FXMLSupport.changeScene(event, "/org/example/finalexam/LoginPage.fxml", "Login Page")
         );
         bt_return.setOnAction(event ->
-                FXMLSupport.changeScene(event, "/org/example/finalexam/PreBookingTicket_Page", "Booking Account Page")
+                FXMLSupport.changeScene(event, "/org/example/finalexam/Welcome_Page.fxml", "Booking Account Page")
         );
         bt_signup.setOnAction(this::handleSignUp);
     }

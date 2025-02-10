@@ -2,7 +2,6 @@ package org.example.finalexam.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author Hoang Minh Thang - s3999925
@@ -10,11 +9,11 @@ import java.util.Random;
 
 public class GenerateInput {
     /**
-     * Returns a random available seat number from the total seats, excluding the booked seats.
+     * Returns a suitable available seat number from the total seats, excluding the booked seats.
      *
      * @param totalSeats   the total number of seats
      * @param bookedSeats  the list of seats that are already booked
-     * @return a random available seat number
+     * @return a suitable available seat number
      * @throws IllegalArgumentException if there are no available seats
      */
     public static int getRandomAvailableSeatNumber(int totalSeats, List<Integer> bookedSeats) {
@@ -29,9 +28,8 @@ public class GenerateInput {
         if (availableSeats.isEmpty()) {
             throw new IllegalArgumentException("No available seats");
         }
-        // Select a random available seat
-        Random random = new Random();
-        return availableSeats.get(random.nextInt(availableSeats.size()));
+        // Select a suitable available seat
+        return availableSeats.getFirst();
     }
 
     public static String getSimplifyFullName(String fullName) {

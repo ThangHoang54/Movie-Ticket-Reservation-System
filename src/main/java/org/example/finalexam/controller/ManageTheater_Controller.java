@@ -70,7 +70,7 @@ public class ManageTheater_Controller implements Initializable {
 
     private void setUPButton() {
         bt_return.setOnAction(e -> {
-            FXMLSupport.changeScene(e,"/org/example/finalexam/Welcome_Page.fxml", "Welcome Page");
+            FXMLSupport.changeScene(e, "/org/example/finalexam/AdminHomePage.fxml", "Admin Homepage");
         });
         bt_reset_field.setOnAction(e -> {
             tf_id.setText("");

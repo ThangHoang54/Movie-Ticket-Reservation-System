@@ -32,17 +32,17 @@
                                 <Font name="System Bold Italic" size="24.0" />
                             </font>
                         </Label>
-                        <Label layoutX="61.0" layoutY="22.0" text="Return" textFill="#f6f3f3">
+                        <Label layoutX="61.0" layoutY="22.0" text="Logout" textFill="#f6f3f3">
                             <font>
                                 <Font name="System Bold Italic" size="14.0" />
                             </font>
                         </Label>
                         <Button fx:id="bt_return" layoutX="14.0" layoutY="14.0" mnemonicParsing="false">
                             <graphic>
-                                <FontIcon iconLiteral="far-arrow-alt-circle-left" iconSize="24" text="" />
+                                <FontIcon iconLiteral="fas-sign-out-alt" iconSize="24" />
                             </graphic>
                         </Button>
-                        <ProgressBar fx:id="progressBar" layoutX="18.0" layoutY="475.0" prefHeight="18.0" prefWidth="163.0" progress="0.0" />
+                        <ProgressBar fx:id="progressBar" layoutX="18.0" layoutY="459.0" prefHeight="18.0" prefWidth="163.0" progress="0.0" />
                     </children>
                 </AnchorPane>
                 <VBox prefHeight="540.0" prefWidth="899.0">

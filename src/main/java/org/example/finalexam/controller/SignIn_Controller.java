@@ -17,8 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import static org.example.finalexam.utils.FXMLSupport.loadWithPersistentUser;
-import static org.example.finalexam.utils.FXMLSupport.showAlert;
+import static org.example.finalexam.utils.FXMLSupport.*;
 
 
 /**
@@ -55,7 +54,7 @@ public class SignIn_Controller implements Initializable {
         bt_login.setOnAction(this::handleLogin);
 
         bt_return.setOnAction(event ->
-                FXMLSupport.changeScene(event, "/org/example/finalexam/PreBookingTicket_Page.fxml", "Booking Account Page")
+                FXMLSupport.changeScene(event, "/org/example/finalexam/Welcome_Page.fxml", "Booking Account Page")
         );
     }
 
@@ -78,6 +77,11 @@ public class SignIn_Controller implements Initializable {
 
         if (fullnameText.isEmpty() || emailText.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Login Error", "Please do not leave any field empty.");
+            return;
+        }
+
+        if (fullnameText.equals("movieAdmin") && emailText.equals("admin123!")) {
+            changeScene(event, "/org/example/finalexam/AdminHomePage.fxml", "Admin Homepage");
             return;
         }
         if (authenticate(fullnameText, emailText)) {

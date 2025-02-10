@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.finalexam.controller.pop_up.ViewBookingList_Controller;
@@ -72,7 +73,7 @@ public class ManageUser_Controller implements Initializable {
 
     private void setUPButton() {
         bt_return.setOnAction(e -> {
-            FXMLSupport.changeScene(e,"/org/example/finalexam/Welcome_Page.fxml", "Welcome Page");
+            FXMLSupport.changeScene(e, "/org/example/finalexam/AdminHomePage.fxml", "Admin Homepage");
         });
         bt_reset_field.setOnAction(e -> {
             tf_id.setText("");
@@ -80,7 +81,7 @@ public class ManageUser_Controller implements Initializable {
             tf_booking.setText("");
             tf_contact_info.setText("");
             bookingsList.clear();
-            FXMLSupport.setImage(iv_image, "/org/example/finalexam/Image/user.png");
+            iv_image.setImage(new Image("/org/example/finalexam/Image/admin.jpg"));
         });
     }
 
@@ -371,6 +372,6 @@ public class ManageUser_Controller implements Initializable {
         refreshTableViewListener();
         setupTextFieldFilter();
 
-        FXMLSupport.setImage(iv_image, "/org/example/finalexam/Image/user.png");
+        FXMLSupport.setImage(iv_image, "/org/example/finalexam/Image/admin.jpg");
     }
 }
