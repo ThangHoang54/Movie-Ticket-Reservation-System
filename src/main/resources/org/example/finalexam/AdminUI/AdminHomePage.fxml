@@ -24,7 +24,6 @@
          <children>
             <AnchorPane prefHeight="540.0" prefWidth="250.0" style="-fx-background-color: #16404D;">
                <children>
-                  <ImageView fx:id="iv_image1" fitHeight="119.0" fitWidth="135.0" layoutX="18.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
                   <Button fx:id="bt_logout" layoutX="14.0" layoutY="496.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="42.0">
                      <graphic>
                         <FontIcon iconLiteral="fas-sign-out-alt" iconSize="24" />
@@ -35,11 +34,12 @@
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="18.0" layoutY="279.0" prefHeight="131.0" prefWidth="135.0" text="Admin Homepage" textAlignment="CENTER" textFill="#fdf9f9" wrapText="true">
+                  <Label alignment="CENTER" layoutX="18.0" layoutY="333.0" prefHeight="131.0" prefWidth="135.0" text="Admin Homepage" textAlignment="CENTER" textFill="#fdf9f9" wrapText="true">
                      <font>
                         <Font name="System Bold Italic" size="24.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="iv_image3" fitHeight="325.0" fitWidth="135.0" layoutX="19.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
                </children></AnchorPane>
             <AnchorPane prefHeight="540.0" prefWidth="1000.0" style="-fx-background-color: #FBF5DD;">
                <children>
@@ -65,6 +65,8 @@
                         <Font name="System Bold Italic" size="36.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="iv_image1" fitHeight="248.0" fitWidth="275.0" layoutX="60.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="iv_image2" fitHeight="248.0" fitWidth="275.0" layoutX="603.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </children>

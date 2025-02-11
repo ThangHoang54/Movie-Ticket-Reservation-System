@@ -19,16 +19,24 @@ import java.util.ResourceBundle;
 
 import static org.example.finalexam.utils.FXMLSupport.*;
 
-
 /**
  * @author Hoang Minh Thang - s3999925
  */
+
 public class SignIn_Controller implements Initializable {
 
     @FXML
     private TextField tf_fullname;
     @FXML
     private TextField tf_email;
+    @FXML
+    private Label lb_login_message;
+    @FXML
+    private Label lb_credential1;
+    @FXML
+    private Label lb_credential2;
+    @FXML
+    private Button bt_login_role;
     @FXML
     private Button bt_login;
     @FXML
@@ -37,12 +45,13 @@ public class SignIn_Controller implements Initializable {
     private Button bt_return;
 
     private final UserInfoDAO userInfoDAO = new UserInfoController();
+    private boolean isUserLoggedIn = true;
 
     /**
      * Initializes the controller.
      * Sets up button actions for navigation and login functionality.
      *
-     * @param url            The location used to resolve relative paths for the root object, or null if not available.
+     * @param url The location used to resolve relative paths for the root object, or null if not available.
      * @param resourceBundle The resources used to localize the root object, or null if not available.
      */
     @Override
@@ -80,11 +89,11 @@ public class SignIn_Controller implements Initializable {
             return;
         }
 
-        if (fullnameText.equals("movieAdmin") && emailText.equals("admin123!")) {
+        if (fullnameText.equals("movieAdmin") && emailText.equals("admin123!") && !isUserLoggedIn) {
             changeScene(event, "/org/example/finalexam/AdminUI/AdminHomePage.fxml", "Admin Homepage");
             return;
         }
-        if (authenticate(fullnameText, emailText)) {
+        if (authenticate(fullnameText, emailText) && isUserLoggedIn) {
             User userSession = getUserDetails(fullnameText, emailText);
             if (userSession != null) {
                 loadWithPersistentUser(event, userSession, "/org/example/finalexam/UserUI/BookMovieTicket.fxml", "Movie Ticket Reservation Page");
@@ -135,6 +144,27 @@ public class SignIn_Controller implements Initializable {
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while connecting to the database.");
             return false;
+        }
+    }
+
+    @FXML
+    void toggleRoleLogin() {
+        isUserLoggedIn = !isUserLoggedIn;
+        if (isUserLoggedIn) {
+            lb_login_message.setText("Welcome Back User");
+            lb_credential1.setText("Full Name");
+            lb_credential2.setText("Email");
+            bt_login_role.setText("Login as User");
+            tf_fullname.setPromptText("Your Full Name");
+            tf_email.setPromptText("Your Email");
+        }
+        else {
+            lb_login_message.setText("Welcome Back Admin");
+            lb_credential1.setText("Username");
+            lb_credential2.setText("Password");
+            bt_login_role.setText("Login as Admin");
+            tf_fullname.setPromptText("Your Username");
+            tf_email.setPromptText("Your Password");
         }
     }
 }

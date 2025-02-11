@@ -4,18 +4,32 @@ Welcome to the COSC2440 Further Programming Lab Test repository! This project se
 for COSC2440 Further Programming course.
 
 ## About the Project ℹ️
+A movie ticket reservation plays a vital role in the efficient operation of 
+the modern theaters. This project involves using __JavaFX__ to create an intuitive front-end interface
+and __Java__ to develop the back-end functionality.
 
-This repository contains the Java source code for an individual lab test project. 
 
+
+## Feature
+> ___User___
+
+- 
+
+> ___Admin___
+
+- 
 ## Getting Started 🚀
 
-To get started with the project:
+- Dependencies:
+    - [JavaFX 23.0.1](https://gluonhq.com/products/javafx/)
+    - [Apache Maven 3.9.9](https://maven.apache.org/download.cgi)
+- Run from source code:
 1. Clone this repository to your local machine.
-2. Compile and run the Java source code provided.
-3. Follow the prompts in the text-based user interface to interact with the system.
+2. Sync the Maven dependencies provided in `pom.xml`.
+3. Compile the Java source code and run the program.
 4. Explore the functionalities and provide feedback for improvements.
 
-> Sample accounts for user to login
+> __Sample user accounts__
 
 | Full Name             | Email                        |
 |-----------------------|------------------------------|
@@ -23,6 +37,12 @@ To get started with the project:
 | Dang Hoang My         | danghoangmy1827@gmail.com    |
 | Nguyen Thuc Thuy Tien | Talents@senvangvn.com        |
 | Son Tung MTP          | booking@mtpentertainment.com |
+
+> __Admin account__
+
+| Username    | Password   |
+|-------------|------------|
+| movieAdmin  | admin123!  |
 
 ## Acknowledgments 🙏
 

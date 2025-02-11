@@ -24,10 +24,30 @@ public class WelcomePage_Controller implements Initializable {
     @FXML
     private ImageView iv_image2;
     @FXML
+    private ImageView iv_image3;
+    @FXML
+    private ImageView iv_image4;
+    @FXML
+    private ImageView iv_image5;
+    @FXML
+    private ImageView iv_image6;
+    @FXML
+    private ImageView iv_image7;
+    @FXML
     private Button bt_login;
     @FXML
     private Button bt_signup;
 
+    private void setupImage() {
+        iv_image1.setImage(new Image("/org/example/finalexam/Image/welcomepage4.png"));
+        iv_image2.setImage(new Image("/org/example/finalexam/Image/welcomepage2.png"));
+        iv_image3.setImage(new Image("/org/example/finalexam/Image/welcomepage6.png"));
+        iv_image4.setImage((new Image("/org/example/finalexam/Image/movieticket.png")));
+        iv_image5.setImage((new Image("/org/example/finalexam/Image/welcomepage3.png")));
+        iv_image6.setImage((new Image("/org/example/finalexam/Image/welcomepage1.png")));
+        iv_image7.setImage(new Image("/org/example/finalexam/Image/welcomepage5.png"));
+        iv_image4.setRotate(350);
+    }
     /**
      * Initializes the landing page controller.
      * Sets up button actions for navigation and application closure.
@@ -37,8 +57,7 @@ public class WelcomePage_Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        iv_image1.setImage(new Image("/org/example/finalexam/Image/welcomepage2.jpg"));
-        iv_image2.setImage(new Image("/org/example/finalexam/Image/welcomepage1.jpg"));
+        setupImage();
         bt_login.setOnAction(event -> {
             FXMLSupport.changeScene(event, "/org/example/finalexam/LoginPage.fxml", "Login Page");
         });

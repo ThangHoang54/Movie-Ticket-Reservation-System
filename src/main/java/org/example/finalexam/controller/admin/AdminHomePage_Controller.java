@@ -10,6 +10,10 @@ import org.example.finalexam.utils.FXMLSupport;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author Hoang Minh Thang - s3999925
+ */
+
 public class AdminHomePage_Controller implements Initializable {
     @FXML
     private Button bt_user;
@@ -23,6 +27,10 @@ public class AdminHomePage_Controller implements Initializable {
     private Button bt_logout;
     @FXML
     private ImageView iv_image1;
+    @FXML
+    private ImageView iv_image2;
+    @FXML
+    private ImageView iv_image3;
 
     /**
      * Initializes the admin homepage controller.
@@ -33,7 +41,9 @@ public class AdminHomePage_Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        iv_image1.setImage(new Image("/org/example/finalexam/Image/admin.jpg"));
+        iv_image1.setImage(new Image("/org/example/finalexam/Image/admin1.jpg"));
+        iv_image2.setImage(new Image("/org/example/finalexam/Image/admin2.jpg"));
+        iv_image3.setImage(new Image("/org/example/finalexam/Image/admin3.jpg"));
         bt_user.setOnAction(event ->
                 FXMLSupport.changeScene(event, "/org/example/finalexam/AdminUI/ManageUser.fxml", "Manage User")
         );
