@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -53,7 +54,7 @@
                         <Font name="System Bold Italic" size="16.0" />
                     </font>
                 </Label>
-                <Label fx:id="lb_credential2" layoutX="319.0" layoutY="261.0" text="Email">
+                <Label fx:id="lb_credential2" layoutX="319.0" layoutY="259.0" text="Email">
                     <font>
                         <Font name="System Bold Italic" size="16.0" />
                     </font>
@@ -82,7 +83,7 @@
                         <Font name="System Bold Italic" size="36.0" />
                     </font>
                 </Label>
-            <TextField fx:id="tf_email" layoutX="424.0" layoutY="258.0" promptText=" Your Email" />
+            <PasswordField fx:id="pf_email" layoutX="424.0" layoutY="258.0" promptText="Your Email" />
             </children>
         </AnchorPane>
     </children>

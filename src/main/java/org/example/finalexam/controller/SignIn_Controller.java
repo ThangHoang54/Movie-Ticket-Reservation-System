@@ -28,7 +28,7 @@ public class SignIn_Controller implements Initializable {
     @FXML
     private TextField tf_fullname;
     @FXML
-    private TextField tf_email;
+    private PasswordField pf_email;
     @FXML
     private Label lb_login_message;
     @FXML
@@ -82,7 +82,7 @@ public class SignIn_Controller implements Initializable {
      * */
     private void handleLogin(ActionEvent event) {
         String fullnameText = tf_fullname.getText();
-        String emailText = tf_email.getText();
+        String emailText = pf_email.getText();
 
         if (fullnameText.isEmpty() || emailText.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Login Error", "Please do not leave any field empty.");
@@ -156,7 +156,7 @@ public class SignIn_Controller implements Initializable {
             lb_credential2.setText("Email");
             bt_login_role.setText("Login as User");
             tf_fullname.setPromptText("Your Full Name");
-            tf_email.setPromptText("Your Email");
+            pf_email.setPromptText("Your Email");
         }
         else {
             lb_login_message.setText("Welcome Back Admin");
@@ -164,7 +164,7 @@ public class SignIn_Controller implements Initializable {
             lb_credential2.setText("Password");
             bt_login_role.setText("Login as Admin");
             tf_fullname.setPromptText("Your Username");
-            tf_email.setPromptText("Your Password");
+            pf_email.setPromptText("Your Password");
         }
     }
 }

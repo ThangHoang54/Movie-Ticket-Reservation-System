@@ -43,7 +43,7 @@ public class AdminHomePage_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iv_image1.setImage(new Image("/org/example/finalexam/Image/admin1.jpg"));
         iv_image2.setImage(new Image("/org/example/finalexam/Image/admin2.jpg"));
-        iv_image3.setImage(new Image("/org/example/finalexam/Image/admin3.jpg"));
+        iv_image3.setImage(new Image("/org/example/finalexam/Image/admin3.jpeg"));
         bt_user.setOnAction(event ->
                 FXMLSupport.changeScene(event, "/org/example/finalexam/AdminUI/ManageUser.fxml", "Manage User")
         );
