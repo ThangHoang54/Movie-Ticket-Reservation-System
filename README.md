@@ -8,7 +8,8 @@ A movie ticket reservation plays a vital role in the efficient operation of
 the modern theaters. This project involves using __JavaFX__ to create an intuitive front-end interface
 and __Java__ to develop the back-end functionality.
 
-
+In addition to selling tickets at physical counters, most theaters now offer the convenience of online reservations through their websites. This system will faciliate
+the online booking of movies tickets. Each user can make one or more bookings, with each booking linked to a specific movie show. The booking includes details of the seats reserved for the chosen show
 
 ## Feature
 > ___User___
