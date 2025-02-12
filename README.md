@@ -62,7 +62,7 @@ reserved for the chosen show.
 | movieAdmin  | admin123!  |
 
 ## Author 👨‍💻
-___
+
 - [Hoang Minh Thang](https://github.com/ThangHoang54)
 
 ## Acknowledgments 🙏
