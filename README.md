@@ -8,17 +8,33 @@ A movie ticket reservation plays a vital role in the efficient operation of
 the modern theaters. This project involves using __JavaFX__ to create an intuitive front-end interface
 and __Java__ to develop the back-end functionality.
 
-In addition to selling tickets at physical counters, most theaters now offer the convenience of online reservations through their websites. This system will faciliate
-the online booking of movies tickets. Each user can make one or more bookings, with each booking linked to a specific movie show. The booking includes details of the seats reserved for the chosen show
+In addition to selling tickets at physical counters, most theaters now offer the convenience of online reservations through their websites. This system will facilitate
+the online booking of movies tickets. Each user can make one or more bookings, with each booking linked to a specific movie show. The booking includes details of the seats 
+reserved for the chosen show
 
-## Feature
+## Feature 🎯
 > ___User___
 
-- 
+- User can create an account, login to perform booking function.
+- User can view their personal information (name, email, list of bookings).
+- User can view show timing for selected theater.
+- User can make one or more online booking tickets at one time.
 
 > ___Admin___
 
-- 
+- Admin can not sign up.
+- Admin can perform add and update operations on users. Also, a customer
+  can be searched by name or contact information, and the search results will be 
+  ascending ordered.
+- Admin can perform add, update and delete operations on bookings. Also, an order can be
+  searched by its id or the corresponding screen and the search results will be ascending ordered.
+- Admin can perform add, update and delete operations on screens. Also, a screen
+  can be searched by movie name, and the search results will be ordered with respect to show timings
+  in ascending order.
+- Admin can perform add, update and delete operations on theater. Also, a theater
+  can be searched by name or address, and the search results will be ordered with respect to name in
+  ascending order.
+
 ## Getting Started 🚀
 
 - Dependencies:
@@ -44,6 +60,10 @@ the online booking of movies tickets. Each user can make one or more bookings, w
 | Username    | Password   |
 |-------------|------------|
 | movieAdmin  | admin123!  |
+
+## Author 👨‍💻
+___
+- [Hoang Minh Thang](https://github.com/ThangHoang54)
 
 ## Acknowledgments 🙏
 
