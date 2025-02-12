@@ -10,7 +10,7 @@ and __Java__ to develop the back-end functionality.
 
 In addition to selling tickets at physical counters, most theaters now offer the convenience of online reservations through their websites. This system will facilitate
 the online booking of movies tickets. Each user can make one or more bookings, with each booking linked to a specific movie show. The booking includes details of the seats 
-reserved for the chosen show
+reserved for the chosen show.
 
 ## Feature 🎯
 > ___User___
