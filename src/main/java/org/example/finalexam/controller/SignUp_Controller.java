@@ -17,6 +17,7 @@ import org.example.finalexam.daoImplement.UserInfoController;
 import org.example.finalexam.model.User;
 import org.example.finalexam.utils.FXMLSupport;
 import org.example.finalexam.utils.GenerateInput;
+import org.example.finalexam.utils.InputValidation;
 
 
 import java.io.File;
@@ -86,9 +87,9 @@ public class SignUp_Controller implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in all fields and upload your profile image");
             return;
         }
-//        if (!validateSignUp(fullName, email)) {
-//            return;
-//        }
+        if (!InputValidation.validateSignUp(fullName, email)) {
+            return;
+        }
 
         try {
             User user = new User.Builder()

@@ -9,6 +9,7 @@ import org.example.finalexam.daoImplement.UserInfoController;
 import org.example.finalexam.model.User;
 import org.example.finalexam.utils.DatabaseConnection;
 import org.example.finalexam.utils.FXMLSupport;
+import org.example.finalexam.utils.InputValidation;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -93,6 +94,11 @@ public class SignIn_Controller implements Initializable {
             changeScene(event, "/org/example/finalexam/AdminUI/AdminHomePage.fxml", "Admin Homepage");
             return;
         }
+
+        if (!InputValidation.validateSignUp(fullnameText, emailText)) {
+            return;
+        }
+
         if (authenticate(fullnameText, emailText) && isUserLoggedIn) {
             User userSession = getUserDetails(fullnameText, emailText);
             if (userSession != null) {

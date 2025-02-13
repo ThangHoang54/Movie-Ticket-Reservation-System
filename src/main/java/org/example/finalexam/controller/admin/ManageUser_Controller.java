@@ -22,6 +22,7 @@ import org.example.finalexam.model.Booking;
 import org.example.finalexam.model.User;
 import org.example.finalexam.utils.FXMLSupport;
 import org.example.finalexam.utils.GenerateInput;
+import org.example.finalexam.utils.InputValidation;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -102,10 +103,11 @@ public class ManageUser_Controller implements Initializable {
                 progressBar.setVisible(false);
                 return;
             }
-//            if(!validateSignUp(tf_username.getText(), null, tf_fullname.getText(), tf_email.getText(), tf_phone.getText())) {
-//                progressBar.setVisible(false);
-//                return;
-//            }
+
+            if(!InputValidation.validateManageUser(tf_fullname.getText(), tf_contact_info.getText())) {
+                progressBar.setVisible(false);
+                return;
+            }
 
             Task<Void> task = new Task<>() {
                 @Override
@@ -171,10 +173,11 @@ public class ManageUser_Controller implements Initializable {
                 progressBar.setVisible(false);
                 return;
             }
-//            if (!validateSignUp(tf_username.getText(), null, tf_fullname.getText(), tf_email.getText(), tf_phone.getText())) {
-//                progressBar.setVisible(false);
-//                return;
-//            }
+
+            if(!InputValidation.validateManageUser(tf_fullname.getText(), tf_contact_info.getText())) {
+                progressBar.setVisible(false);
+                return;
+            }
 
             Task<Void> task = new Task<>() {
                 @Override

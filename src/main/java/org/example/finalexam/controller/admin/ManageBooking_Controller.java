@@ -108,10 +108,6 @@ public class ManageBooking_Controller implements Initializable {
                 progressBar.setVisible(false);
                 return;
             }
-//            if(!validateSignUp(tf_username.getText(), null, tf_fullname.getText(), tf_email.getText(), tf_phone.getText())) {
-//                progressBar.setVisible(false);
-//                return;
-//            }
 
             Task<Void> task = new Task<>() {
                 @Override
@@ -204,10 +200,6 @@ public class ManageBooking_Controller implements Initializable {
                 progressBar.setVisible(false);
                 return;
             }
-//            if (!validateSignUp(tf_username.getText(), null, tf_fullname.getText(), tf_email.getText(), tf_phone.getText())) {
-//                progressBar.setVisible(false);
-//                return;
-//            }
 
             Task<Void> task = new Task<>() {
                 @Override

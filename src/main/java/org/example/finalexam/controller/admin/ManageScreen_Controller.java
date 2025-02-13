@@ -20,6 +20,7 @@ import org.example.finalexam.daoImplement.TheaterController;
 import org.example.finalexam.model.Screen;
 import org.example.finalexam.model.Theater;
 import org.example.finalexam.utils.FXMLSupport;
+import org.example.finalexam.utils.InputValidation;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -104,10 +105,11 @@ public class ManageScreen_Controller implements Initializable {
                 progressBar.setVisible(false);
                 return;
             }
-//            if(!validateSignUp(tf_username.getText(), null, tf_fullname.getText(), tf_email.getText(), tf_phone.getText())) {
-//                progressBar.setVisible(false);
-//                return;
-//            }
+
+            if(!InputValidation.validateManageScreen(tf_movie_name.getText())) {
+                progressBar.setVisible(false);
+                return;
+            }
 
             Task<Void> task = new Task<>() {
                 @Override
@@ -238,10 +240,11 @@ public class ManageScreen_Controller implements Initializable {
                 progressBar.setVisible(false);
                 return;
             }
-//            if (!validateSignUp(tf_username.getText(), null, tf_fullname.getText(), tf_email.getText(), tf_phone.getText())) {
-//                progressBar.setVisible(false);
-//                return;
-//            }
+
+            if(!InputValidation.validateManageScreen(tf_movie_name.getText())) {
+                progressBar.setVisible(false);
+                return;
+            }
 
             Task<Void> task = new Task<>() {
                 @Override

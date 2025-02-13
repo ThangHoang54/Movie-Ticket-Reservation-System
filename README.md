@@ -65,6 +65,17 @@ reserved for the chosen show.
 
 - [Hoang Minh Thang](https://github.com/ThangHoang54)
 
+
+## Technologies Used 💻
+
+Java, Maven, JavaFX, JAR, JUnit, MySQL with MySQLWorkbench 8.0 CE, JDBC, IntelliJ, Git
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=git,idea,java,mysql"/>
+  </a>
+</p>
+
 ## Acknowledgments 🙏
 
 Special thanks to the course instructors for providing guidance and resources for this assignment.
