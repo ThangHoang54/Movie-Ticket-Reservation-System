@@ -63,7 +63,7 @@ reserved for the chosen show.
 
 ## Author 👨‍💻
 
-- [Hoang Minh Thang](https://github.com/ThangHoang54)
+- **Hoang Minh Thang** - [ThangHoang54](https://github.com/ThangHoang54).
 
 
 ## Technologies Used 💻
