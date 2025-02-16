@@ -19,6 +19,7 @@ reserved for the chosen show.
 - User can view their personal information (name, email, list of bookings).
 - User can view show timing for selected theater.
 - User can make one or more online booking tickets at one time.
+- User can view and take the screenshot of their booking QR code after buying movie ticket(s) successfully.
 
 > ___Admin___
 

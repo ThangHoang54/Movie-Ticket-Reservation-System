@@ -3,6 +3,9 @@ module org.example.finalexam {
     requires javafx.fxml;
     requires com.zaxxer.hikari;
     requires java.sql;
+    requires java.desktop;
+    requires com.google.zxing;
+    requires com.google.zxing.javase;
 
     opens org.example.finalexam to javafx.fxml;
     opens org.example.finalexam.controller to javafx.fxml;

@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.example.finalexam.controller.pop_up.QRCodeViewer_Controller;
 import org.example.finalexam.controller.pop_up.ViewBookingList_Controller;
 import org.example.finalexam.dao.BookingDAO;
 import org.example.finalexam.dao.ScreenDAO;
@@ -61,6 +62,8 @@ public class BookingMovieTicket_Controller implements Initializable {
     private Button bt_return;
     @FXML
     private Button bt_reset_field;
+    @FXML
+    private Button bt_viewQRCode;
     @FXML
     private Label lb_fullname;
     @FXML
@@ -115,12 +118,14 @@ public class BookingMovieTicket_Controller implements Initializable {
     }
 
     private void setupSpinner() {
-        // Create a spinner with a range from 1 to 10
+        // Create a spinner with a range from 1 to 4
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
         sn_quantity.setValueFactory(valueFactory);
     }
 
     private void setUPButton() {
+        bt_viewQRCode.setDisable(true);
+
         bt_return.setOnAction(e -> {
             FXMLSupport.changeScene(e,"/org/example/finalexam/Welcome_Page.fxml", "Welcome Page");
         });
@@ -131,6 +136,7 @@ public class BookingMovieTicket_Controller implements Initializable {
             lb_price.setText("$0.0");
             lb_total_price.setText("$0.0");
             sn_quantity.getValueFactory().setValue(0);
+            bt_viewQRCode.setDisable(true);
         });
     }
 
@@ -227,8 +233,9 @@ public class BookingMovieTicket_Controller implements Initializable {
                             "Your Movie Name: " + tf_movie_name.getText() + "\n" +
                             "You had book on: " + Date.valueOf(LocalDate.now()) + "\n" +
                             "Your Reserved Seat(s): " + seats + "\n\n" +
-                            "Please arrive 15 minutes before the showtime and present this confirmation at the ticket counter. Enjoy the movie!"
+                            "Please screenshot your QR code and arrive 15 minutes before the showtime and present this confirmation at the ticket counter. Enjoy the movie!"
                     );
+                    bt_viewQRCode.setDisable(false);
                 }
 
                 @Override
@@ -275,6 +282,23 @@ public class BookingMovieTicket_Controller implements Initializable {
         }
     }
 
+    @FXML
+    void handleViewQRCode(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/finalexam/Pop_Up_Window/QRCode.fxml"));
+        Parent root = loader.load();
+        QRCodeViewer_Controller controller = loader.getController();
+
+        controller.generateQRCode();
+
+        Stage stage = new Stage();
+        stage.setTitle("QR Code Viewer");
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.show();
+
+    }
+
     public void setupTableColumns() {
         column_timing.setCellValueFactory(new PropertyValueFactory<>("timing"));
         column_movie_name.setCellValueFactory(new PropertyValueFactory<>("movie_name"));
@@ -294,7 +318,9 @@ public class BookingMovieTicket_Controller implements Initializable {
                 tf_theater_address.setText(newSelection.getTheater().getAddress());
                 lb_price.setText("$" + newSelection.getPrice());
                 lb_total_price.setText("$" + newSelection.getPrice() * sn_quantity.getValue());
+                sn_quantity.getValueFactory().setValue(1);
 
+                bt_viewQRCode.setDisable(true);
                 totalAvailableSeats = newSelection.getSeat_available();
             }
         });
