@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/movie_ticket_reservation";
     private static final String USER = "root";
-    private static final String PASSWORD = "6Hs@9GM88t";
+    private static final String PASSWORD = ""; // Type your password here
     private static Connection connection;
 
     static {
@@ -66,11 +66,6 @@ public class DatabaseConnection {
      *
      * <p>This method should be called when the application is shutting down to ensure proper cleanup of resources.</p>
      */
-//    public static void closeDataSource() {
-//        if (dataSource != null) {
-//            dataSource.close();
-//        }
-//    }
     public static void closeDataSource() {
         if (connection != null) {
             try {
@@ -80,6 +75,11 @@ public class DatabaseConnection {
             }
         }
     }
+//  public static void closeDataSource() {
+//        if (dataSource != null) {
+//            dataSource.close();
+//        }
+//    }
 
 //    /**
 //     * Sets a custom HikariDataSource for the application.

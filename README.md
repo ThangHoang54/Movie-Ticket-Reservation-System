@@ -37,13 +37,19 @@ reserved for the chosen show.
   ascending order.
 
 ## Getting Started 🚀
-
+- You must install the SQL Workbench 8.0 CE into your local device (computer, laptop, desktop) in order to the app retrieve data successfully.
+<br></br>
 - Dependencies:
     - [JavaFX 23.0.1](https://gluonhq.com/products/javafx/)
     - [Apache Maven 3.9.9](https://maven.apache.org/download.cgi)
+<br></br>
 - Run from source code:
 1. Clone this repository to your local machine.
 2. Sync the Maven dependencies provided in `pom.xml`.
+3. Copy the SQL script in [sql.file](src/main/resources/org/example/finalexam/SQL_Data/Movie_Ticket_SQL.sql) into 
+SQL Workbench 8.0 CE and execute it.
+4. Go to [DatabaseConnection_Class](src/main/java/org/example/finalexam/utils/DatabaseConnection.java) and change the PASSWORD
+to your registered password.
 3. Compile the Java source code and run the program.
 4. Explore the functionalities and provide feedback for improvements.
 
