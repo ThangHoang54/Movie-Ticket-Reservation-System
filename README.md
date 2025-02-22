@@ -51,8 +51,8 @@ reserved for the chosen show.
 SQL Workbench 8.0 CE and execute it.
    5. You need to get your own user & password of your *Local instance MySQL 80* and replace it in [DatabaseConnection_Class](src/main/java/org/example/finalexam/utils/DatabaseConnection.java) on line 16, 17:
 ```java
-private static final String USER = "YOUR USER";
-private static final String PASSWORD = "YOUR PASSWORD"; // Type your password here
+private static final String USER = "YOUR USER"; // Type your USER here
+private static final String PASSWORD = "YOUR PASSWORD"; // Type your PASSWORD here
 ```
 
 6. Compile the Java source code and run the program.
