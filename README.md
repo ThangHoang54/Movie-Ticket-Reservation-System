@@ -49,7 +49,7 @@ reserved for the chosen show.
 3. Create the new database called 'movie_ticket_reservation' in SQL Workbench 8.0 CE. 
 4. Copy the SQL script in [sql.file](src/main/resources/org/example/finalexam/SQL_Data/Movie_Ticket_SQL.sql) into 
 SQL Workbench 8.0 CE and execute it.
-   5. You need to get your own user & password of your *Local instance MySQL 80* and replace it in [DatabaseConnection_Class](src/main/java/org/example/finalexam/utils/DatabaseConnection.java) on line 16, 17:
+5. You need to get your own user & password of your *Local instance MySQL 80* and replace it in [DatabaseConnection_Class](src/main/java/org/example/finalexam/utils/DatabaseConnection.java) on line 16, 17:
 ```java
 private static final String USER = "YOUR USER"; // Type your USER here
 private static final String PASSWORD = "YOUR PASSWORD"; // Type your PASSWORD here
