@@ -1,4 +1,4 @@
-# COSC2440 Further Programming Lab Test - Movie Ticket Reservation System Application 📽️🎫
+# COSC2440 Further Programming Lab Test Enhance - Movie Ticket Reservation System Application 📽️🎫
 
 Welcome to the COSC2440 Further Programming Lab Test repository! This project serves as the Lab Test source code 
 for COSC2440 Further Programming course.
