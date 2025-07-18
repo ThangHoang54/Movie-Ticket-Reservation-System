@@ -1,4 +1,4 @@
-# COSC2440 Further Programming Lab Test Enhance - Movie Ticket Reservation System Application 📽️🎫
+# Movie Ticket Reservation System Application 📽️🎫
 
 Welcome to the COSC2440 Further Programming Lab Test repository! This project serves as the Lab Test source code 
 for COSC2440 Further Programming course.
@@ -64,8 +64,6 @@ private static final String PASSWORD = "YOUR PASSWORD"; // Type your PASSWORD he
 |-----------------------|------------------------------|
 | Le Pham Quang Dai     | 19042005dai@gmail.com        |
 | Dang Hoang My         | danghoangmy1827@gmail.com    |
-| Nguyen Thuc Thuy Tien | Talents@senvangvn.com        |
-| Son Tung MTP          | booking@mtpentertainment.com |
 
 > __Admin account__
 
